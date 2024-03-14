@@ -6,7 +6,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
 
 export default function Navbar() {
-  const [Open, setOpen] = useState(false);
+  const [Open, setOpen] = useState(true);
   return (
     <div className="fixed top-0 left-0 w-full">
       <nav className="flex md:flex-row flex-col w-full h-[80px] items-center px-9 justify-between font-semibold border-b-2 shadow-lg z-20 bg-white">
