@@ -7,7 +7,7 @@ export default function Hero() {
         <div className="flex flex-col items-center justify-center md:max-w-[40%] md:ml-28 mt-[-20px]">
           <div className="flex flex-col text-left ">
             <h2 className="text-2xl font-semibold text-center md:text-start">
-              Lorem ipsum dolor sit.
+              Pysznie, tanio, wspólnie...
             </h2>
             <h1 className="text-8xl font-semibold mt-4 text-center md:text-start">
               JoinMeal
