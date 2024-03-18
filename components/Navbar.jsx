@@ -4,16 +4,24 @@ import NAV_LINKS from "@/consts/Navbar";
 import Button from "./Button";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   const [Open, setOpen] = useState(true);
   return (
     <div className="fixed top-0 left-0 w-full">
-      <nav className="flex md:flex-row flex-col w-full h-[80px] items-center px-9 justify-between font-semibold border-b-2 shadow-lg z-20 bg-white">
+      <nav className="flex md:flex-row flex-col w-full h-[80px] md:items-center px-9 justify-between font-semibold border-b-2 shadow-lg z-20 bg-white">
         <div className="w-auto">
-          <h1 className="text-2xl font-bold text-center mt-6 md:mt-0 cursor-pointer text-[#0A390C]">
-            JoinMeal
-          </h1>
+          <Link href={"/"}>
+            <Image
+              src="/logo1.png"
+              alt="Logo"
+              width={50}
+              height={10}
+              className="text-left mt-3 ml-[-10px] md:ml-0 md:mt-0"
+            />
+          </Link>
         </div>
         <div className="md:flex md:flex-row">
           <div
