@@ -5,12 +5,11 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import Link from "next/link";
 import { useState } from "react";
 import { getSession, useSession } from "next-auth/react";
-import Fetchuser from "@/components/NavBarLogged";
 
 export default function NavBarLogged() {
   const { data: session } = useSession();
   const [openNotifiactions, setOpenNotifications] = useState(false);
-
+  const convertImage = Buffer.from(session?.user?.image.data, "base64");
   return (
     <div className="flex w-full h-16 items-center justify-center fixed">
       <div className="flex flex-row items-center w-[80%]  h-16 border-b-2 shadow justify-between px-4">
@@ -35,16 +34,16 @@ export default function NavBarLogged() {
             1
           </div>
           <div className="border-2 border-[#0A390C] rounded-full w-10 h-10">
-            <Fetchuser />
             <Link href={"/dashboard/profile"}>
               <Image
-                src="/"
+                src={""}
                 alt="user_photo"
                 width={50}
                 height={30}
                 className="rounded-full"
               />
             </Link>
+            <img src={convertImage} alt="asd" />
           </div>
         </div>
       </div>
