@@ -35,7 +35,6 @@ export default function NavBarLogged() {
             1
           </div>
           <div className="border-2 border-[#0A390C] rounded-full w-10 h-10">
-            <Fetchuser />
             <Link href={"/dashboard/profile"}>
               <Image
                 src="/"

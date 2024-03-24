@@ -4,6 +4,7 @@ import React from "react";
 
 export default function Profile() {
   return (
+
     <DashboardLayout>
       <div className="w-[80%] h-screen bg-gray-200 ml-[10%] flex flex-col">
         <h1 className="text-5xl text-black text-center mt-24">Profil</h1>
