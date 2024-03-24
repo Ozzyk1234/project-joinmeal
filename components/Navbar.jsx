@@ -1,13 +1,16 @@
 "use client";
 import React, { useState } from "react";
 import NAV_LINKS from "@/consts/Navbar";
-import Button from "./Button";
+import Button from "./Buttons/Button";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 export default function Navbar() {
+  const { data: session } = useSession();
   const [Open, setOpen] = useState(true);
   return (
     <div className="fixed top-0 left-0 w-full">
@@ -40,10 +43,25 @@ export default function Navbar() {
                 {link.label}
               </li>
             ))}
-            <div className="flex flex-row gap-5 md:ml-7 text-white">
-              <Button name="Zaloguj się" action="/login" />
-              <Button name="Rejestracja" action="/register" />
-            </div>
+
+            {session ? (
+              <div className="flex flex-row items-center">
+                <Link href={"/dashboard"} className="mr-9">
+                  <li>Kokpit</li>
+                </Link>
+                <li
+                  className="cursor-pointer bg-[#A92424] text-white py-3 px-5 rounded-full hover:bg-white hover:text-[#A92424] transition-all duration-100"
+                  onClick={() => signOut()}
+                >
+                  Wyloguj się
+                </li>
+              </div>
+            ) : (
+              <div className="flex flex-row gap-5 md:ml-7 text-white">
+                <Button name="Zaloguj się" action="/login" />
+                <Button name="Rejestracja" action="/register" />
+              </div>
+            )}
           </ul>
         </div>
       </nav>

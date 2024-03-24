@@ -17,7 +17,7 @@ datasource db {
 model User {
   id            Int       @id @default(autoincrement())
   userName      String
-  image         Bytes?
+  picture       Bytes?
   buildingName  String?
   description   String?
   email         String    @unique

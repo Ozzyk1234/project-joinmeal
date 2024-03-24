@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+
 const prisma = await new PrismaClient();
 
 export async function POST(req) {
@@ -28,11 +29,14 @@ export async function POST(req) {
         { status: 500 }
       );
     } else {
+      const pictureUser = "/user.jpg";
+
       const user = await prisma.user.create({
         data: {
           email: email,
           password: hashedpassword,
           userName: username,
+          picture: Buffer.from(pictureUser).toString("base64"),
         },
       });
       return NextResponse.json(

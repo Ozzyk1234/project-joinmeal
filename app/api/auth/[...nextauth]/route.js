@@ -39,19 +39,18 @@ const authOptions = {
   ],
   callbacks: {
     async jwt({ token, user, session }) {
-      console.log("jwt callback", { token, user, session });
       if (user) {
         return {
           ...token,
           id: user.id,
           description: user.description,
           userName: user.userName,
+          picture: user.picture,
         };
       }
       return token;
     },
     async session({ session, token, user }) {
-      console.log("session callback", { session, token, user });
       return {
         ...session,
         user: {
@@ -59,9 +58,9 @@ const authOptions = {
           id: token.id,
           description: token.description,
           userName: token.userName,
+          picture: token.picture,
         },
       };
-      return session;
     },
   },
   session: {

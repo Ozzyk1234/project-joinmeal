@@ -1,9 +1,12 @@
 import React from "react";
-import UserInfo from "@/components/UserInfo";
+import MainContent from "@/components/MainContent";
+import DashboardLayout from "@/components/DashboardLayout";
 export default function Dashboard() {
   return (
-    <div className="flex flex-col w-full h-screen items-center justify-center">
-      <UserInfo />
+    <div className="w-full h-screen">
+      <DashboardLayout>
+        <MainContent />
+      </DashboardLayout>
     </div>
   );
 }
