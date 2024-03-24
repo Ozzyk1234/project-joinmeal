@@ -36,7 +36,7 @@ export async function POST(req) {
           email: email,
           password: hashedpassword,
           userName: username,
-          picture: Buffer.from(pictureUser).toString("base64"),
+          image: Buffer.from(pictureUser).toString("base64"),
         },
       });
       return NextResponse.json(
