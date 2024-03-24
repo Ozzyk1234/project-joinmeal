@@ -45,7 +45,6 @@ const authOptions = {
           id: user.id,
           description: user.description,
           userName: user.userName,
-          picture: user.picture,
         };
       }
       return token;
@@ -58,7 +57,6 @@ const authOptions = {
           id: token.id,
           description: token.description,
           userName: token.userName,
-          picture: token.picture,
         },
       };
     },
