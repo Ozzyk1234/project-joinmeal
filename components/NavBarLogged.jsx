@@ -3,13 +3,27 @@ import Image from "next/image";
 import Notifications from "./Notifications";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import Link from "next/link";
-import { useState } from "react";
-import { getSession, useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 export default function NavBarLogged() {
   const { data: session } = useSession();
   const [openNotifiactions, setOpenNotifications] = useState(false);
-  const convertImage = Buffer.from(session?.user?.image.data, "base64");
+  const [userImage, setUserImage] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (session?.user?.image) {
+        const base64Image = await Buffer.from(session.user.image.data).toString(
+          "base64"
+        );
+        const decodedString = atob(base64Image);
+        setUserImage(decodedString);
+      }
+    };
+    fetchUserData();
+  }, [session?.user?.image]);
+
   return (
     <div className="flex w-full h-16 items-center justify-center fixed">
       <div className="flex flex-row items-center w-[80%]  h-16 border-b-2 shadow justify-between px-4">
@@ -35,15 +49,16 @@ export default function NavBarLogged() {
           </div>
           <div className="border-2 border-[#0A390C] rounded-full w-10 h-10">
             <Link href={"/dashboard/profile"}>
-              <Image
-                src={""}
-                alt="user_photo"
-                width={50}
-                height={30}
-                className="rounded-full"
-              />
+              {userImage && (
+                <Image
+                  src={userImage}
+                  alt="Image"
+                  width={100}
+                  height={100}
+                  className="rounded-full"
+                />
+              )}
             </Link>
-            <img src={convertImage} alt="asd" />
           </div>
         </div>
       </div>
