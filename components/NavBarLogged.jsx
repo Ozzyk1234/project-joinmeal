@@ -7,22 +7,23 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 export default function NavBarLogged() {
-  const { data: session } = useSession();
-  const [openNotifiactions, setOpenNotifications] = useState(false);
+  const [openNotifications, setOpenNotifications] = useState(false);
   const [userImage, setUserImage] = useState(null);
+  const { data: session } = useSession();
 
   useEffect(() => {
     const fetchUserData = async () => {
-      if (session?.user?.image) {
-        const base64Image = await Buffer.from(session.user.image.data).toString(
-          "base64"
-        );
-        const decodedString = atob(base64Image);
-        setUserImage(decodedString);
+      if (session?.user?.id) {
+        const fetchImage = await fetch(`/api/userImage/${session.user.id}`, {
+          method: "GET",
+        });
+        const userImage = await fetchImage.json();
+        console.log(userImage);
+        setUserImage(userImage);
       }
     };
     fetchUserData();
-  }, [session?.user?.image]);
+  }, [session?.user?.id]);
 
   return (
     <div className="flex w-full h-16 items-center justify-center fixed">
@@ -43,7 +44,7 @@ export default function NavBarLogged() {
           >
             <IoIosNotificationsOutline className="w-8 h-8 text-[#0A390C]" />
           </button>
-          {openNotifiactions ? <Notifications /> : ""}
+          {openNotifications ? <Notifications /> : ""}
           <div className="bg-red-600 text-center text-[12px] text-white rounded-full border-2 border-[#0A390C] absolute top-[-3px] left-[20%] w-7 h-5">
             1
           </div>
