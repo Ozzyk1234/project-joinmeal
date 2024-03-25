@@ -3,7 +3,7 @@ import Image from "next/image";
 import Notifications from "./Notifications";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import { useSession } from "next-auth/react";
 
 export default function NavBarLogged() {
@@ -18,7 +18,6 @@ export default function NavBarLogged() {
           method: "GET",
         });
         const userImage = await fetchImage.json();
-        console.log(userImage);
         setUserImage(userImage);
       }
     };
@@ -37,7 +36,7 @@ export default function NavBarLogged() {
         <div className="flex flex-row items-center gap-12 relative">
           <button
             onClick={() =>
-              openNotifiactions
+              openNotifications
                 ? setOpenNotifications(false)
                 : setOpenNotifications(true)
             }
