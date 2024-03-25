@@ -15,11 +15,15 @@ datasource db {
 
 model User {
   id            Int       @id @default(autoincrement())
-  userName      String
-  image         Bytes?
-  buildingName  String?
-  description   String?
+  userName      String    
+  firstName     String?   @default("BRAK DANYCH")
+  lastName      String?   @default("BRAK DANYCH")
+  picture       Bytes?    
+  age           Int?       @default(0)
+  sex           String?    @default("Mężczyzna")
+  buildingName  String?   @default("DOM STUDENTA 2 - BLIZNIAK")
+  description   String?   @default("Podaj opis użytkownika...")
   email         String    @unique
-  password      String
+  password      String?
   createdAt     DateTime  @default(now())
 }

@@ -1,22 +1,33 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
+const prisma = await new PrismaClient();
 
 const GET = async (req, { params }) => {
-  const userId = params.userId;
+  const userId = await params.userId;
   const intUserId = parseInt(userId, 10);
-  try {
+
+  if (intUserId) {
     const userData = await prisma.user.findUnique({
       where: {
         id: intUserId,
       },
+      select: {
+        description: true,
+        picture: true,
+        buildingName: true,
+        userName: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        sex: true,
+        age: true,
+        createdAt: true,
+      },
     });
-
-    return new NextResponse(userData, { status: 200 });
-  } catch (err) {
-    return new NextResponse(err, { status: 500 });
+    return new NextResponse(JSON.stringify(userData));
   }
+  return new NextResponse(err, { status: 500 });
 };
 
 export { GET };

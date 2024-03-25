@@ -12,7 +12,7 @@ const POSTUserImage = async (req, { params }) => {
   const updateImage = await prisma.user.update({
     where: { id: userIdINT },
     data: {
-      image: btoa(pictureUser),
+      picture: btoa(pictureUser),
     },
   });
 
@@ -22,38 +22,4 @@ const POSTUserImage = async (req, { params }) => {
   }
 };
 
-const GETUserImage = async (req, { params }) => {
-  const userId = params.userId;
-
-  const userIdINT = parseInt(userId, 10);
-  if (userIdINT) {
-    try {
-      const userImage = await prisma.user.findUnique({
-        where: {
-          id: userIdINT,
-        },
-        select: {
-          image: true,
-        },
-      });
-      if (userImage) {
-        const base64Image = Buffer.from(userImage.image).toString("base64");
-
-        const encodedImage = atob(base64Image);
-        return new NextResponse(JSON.stringify(encodedImage), {
-          status: 200,
-        });
-      } else {
-        return new NextResponse(
-          JSON.stringify({ message: "Nie znaleziono użytkownika" }),
-          { status: 404 }
-        );
-      }
-    } catch (err) {
-      return new NextResponse(JSON.stringify({ message: err.toString() }), {
-        status: 500,
-      });
-    }
-  }
-};
-export { POSTUserImage as POST, GETUserImage as GET };
+export { POSTUserImage as POST };
