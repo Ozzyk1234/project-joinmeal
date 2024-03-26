@@ -1,6 +1,6 @@
 import React from "react";
 import MainContent from "@/components/MainContent";
-import DashboardLayout from "@/components/DashboardLayout";
+import DashboardLayout from "@/components/DashboardLayout/DashboardLayout";
 export default function Dashboard() {
   return (
     <div className="w-full h-screen">
