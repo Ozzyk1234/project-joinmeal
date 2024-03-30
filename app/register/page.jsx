@@ -1,16 +1,29 @@
 "use client";
-import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rpassword, setRPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    rpassword: "",
+    username: "",
+  });
   const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { email, password, rpassword, username } = formData;
 
     if (!email || !password || !rpassword || !username) {
       setError("Nie wypełniono wszystkich pól!");
@@ -22,7 +35,7 @@ export default function RegisterPage() {
       return;
     }
 
-    if (!(password.length >= 8)) {
+    if (password.length < 8) {
       setError("Hasło jest za krótkie!");
       return;
     }
@@ -31,19 +44,25 @@ export default function RegisterPage() {
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify(formData),
       });
 
       if (res.ok) {
-        const form = e.target;
-        form.reset();
+        setFormData({
+          email: "",
+          password: "",
+          rpassword: "",
+          username: "",
+        });
         setError("");
+        router.push("/login");
       } else {
-        const message = await res.json();
-        setError(message.message);
+        const { message } = await res.json();
+        setError(message);
       }
     } catch (error) {
-      console.log("Podczas rejestracji wystąpił błąd: " + error);
+      console.error("Podczas rejestracji wystąpił błąd: ", error);
+      setError("Wystąpił błąd podczas rejestracji. Spróbuj ponownie później.");
     }
   };
 
@@ -58,10 +77,12 @@ export default function RegisterPage() {
           <input
             id="username"
             type="text"
+            name="username"
+            value={formData.username}
             placeholder="Nazwa użytkownika..."
             className="border-2 py-2 px-4"
-            onChange={(e) => setUsername(e.target.value)}
-            autoComplete="false"
+            onChange={handleChange}
+            autoComplete="off"
           />
           <label htmlFor="email" className="mt-3">
             E-mail:
@@ -69,10 +90,12 @@ export default function RegisterPage() {
           <input
             type="email"
             id="email"
+            name="email"
+            value={formData.email}
             placeholder="Email..."
             className="border-2 py-2 px-4"
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete="false"
+            onChange={handleChange}
+            autoComplete="off"
           />
           <label htmlFor="password" className="mt-3">
             Hasło:
@@ -80,10 +103,12 @@ export default function RegisterPage() {
           <input
             type="password"
             id="password"
+            name="password"
+            value={formData.password}
             placeholder="Hasło..."
             className="border-2 py-2 px-4"
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="false"
+            onChange={handleChange}
+            autoComplete="off"
           />
           <label htmlFor="rpassword" className="mt-3">
             Powtórz Hasło:
@@ -91,10 +116,12 @@ export default function RegisterPage() {
           <input
             type="password"
             id="rpassword"
+            name="rpassword"
+            value={formData.rpassword}
             placeholder="Powtórz hasło..."
             className="border-2 py-2 px-4"
-            onChange={(e) => setRPassword(e.target.value)}
-            autoComplete="false"
+            onChange={handleChange}
+            autoComplete="off"
           />
           <button
             type="submit"
@@ -107,10 +134,13 @@ export default function RegisterPage() {
               {error}
             </div>
           )}
-          <Link href={"/login"} className="text-right mt-9">
-            Posiadasz już konto? <span className="underline">Zaloguj się!</span>
-          </Link>
         </form>
+        <p className="text-right mt-3">
+          Posiadasz już konto?{" "}
+          <a href="/login" className="underline">
+            Zaloguj się!
+          </a>
+        </p>
       </div>
     </div>
   );

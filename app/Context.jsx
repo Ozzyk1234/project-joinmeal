@@ -1,35 +1,40 @@
 "use client";
-import React, {
-  useContext,
-  createContext,
-  useState,
-  useEffect,
-  useMemo,
-} from "react";
+import React, { createContext, useState, useEffect, useMemo } from "react";
 import { useSession } from "next-auth/react";
-// Step 1: Create a context to hold the user data
+
 const UserDataContext = createContext();
 
-// Step 2: Create a context provider component
 export const UserDataProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
   const { data: session } = useSession();
 
   useEffect(() => {
-    if (session?.user?.id) {
-      const fetchUserData = async () => {
-        const userId = await session.user.id;
-        const response = await fetch(`/api/userDetails/${userId}`);
-        const userData = await response.json();
-        setUserData(userData);
-      };
-      fetchUserData();
-    }
+    const fetchUserData = async () => {
+      try {
+        if (session?.user?.id) {
+          const userId = session.user.id;
+          const response = await fetch(`/api/userDetails/${userId}`);
+          if (!response.ok) {
+            throw new Error("Failed to fetch user data");
+          }
+          const userData = await response.json();
+          setUserData(userData);
+          setError(null);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error.message);
+        setError("Error fetching user data");
+      }
+    };
+
+    fetchUserData();
   }, [session?.user?.id]);
+
   const cachedUserData = useMemo(() => userData, [userData]);
 
   return (
-    <UserDataContext.Provider value={{ userData: cachedUserData }}>
+    <UserDataContext.Provider value={{ userData: cachedUserData, error }}>
       {children}
     </UserDataContext.Provider>
   );
