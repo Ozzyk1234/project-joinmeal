@@ -3,7 +3,7 @@ import NavBarLogged from "./Navbar/NavBarLogged";
 import SideBar from "./SideBar";
 import Messages from "./Messages";
 
-export default function DashboardLayout({ children }) {
+const DashboardLayout = ({ children }) => {
   return (
     <div className="w-full h-screen">
       <NavBarLogged />
@@ -12,4 +12,6 @@ export default function DashboardLayout({ children }) {
       {children}
     </div>
   );
-}
+};
+
+export default DashboardLayout;

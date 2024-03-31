@@ -1,56 +1,71 @@
 import React, { useState, useEffect } from "react";
-import { useUserData } from "@/app/Context";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 
 export default function ProfilPhoto() {
   const { data: session } = useSession();
-  const { userData } = useUserData();
   const [userImage, setUserImage] = useState(null);
+
   useEffect(() => {
-    const ConvertFrom64 = async () => {
-      if (userData) {
-        const userImage = await userData.picture;
-        const base64Image = Buffer.from(userImage).toString("base64");
-        const encodedImage = atob(base64Image);
-        setUserImage(encodedImage);
+    const fetchUserData = async () => {
+      try {
+        const res = await fetch(`/api/userImage/${session?.user?.id}`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+        const data = await res.json();
+
+        if (data.picture) {
+          const userImage = data.picture;
+          const base64Image = Buffer.from(userImage).toString("base64");
+          const encodedImage = atob(base64Image);
+          console.log(encodedImage);
+          setUserImage(encodedImage);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
       }
     };
-    ConvertFrom64();
-  }, [userData]);
+    fetchUserData();
+  }, [session?.user?.id]);
 
-  const handlefileupload = async (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    data.append("image", e.target.files[0]);
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
 
-    var reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = async () => {
-      const result = reader.result;
+    try {
       const response = await fetch(`/api/userImage/${session?.user?.id}`, {
         method: "POST",
-        body: JSON.stringify({
-          result,
-        }),
+        body: formData,
       });
-    };
+
+      if (response.ok) {
+        const userData = await response.json();
+        setUserImage(userData.picture);
+      } else {
+        console.error("Failed to upload image");
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
   };
 
   return (
-    <div className=" border-r-[1px] border-gray-500 bg-gray-200 flex flex-col w-[30%] items-center">
+    <div className="border-r-[1px] border-gray-500 bg-gray-200 flex flex-col w-[30%] items-center">
       <label
         htmlFor="fileInput"
         className="cursor-pointer relative h-[240px] w-[240px]"
       >
         <div className="rounded-full border-2 border-black overflow-hidden mt-16">
           {userImage ? (
-            <div className="w-[240px] h-[240px] ">
+            <div className="w-[240px] h-[240px]">
               <Image
                 src={userImage}
                 alt="user_photo"
                 width={245}
                 height={245}
+                priority
               />
             </div>
           ) : (
@@ -63,22 +78,15 @@ export default function ProfilPhoto() {
           accept="image/*"
           id="fileInput"
           name="file"
-          onChange={handlefileupload}
-          className="hidden" // hide the input visually
+          onChange={handleFileUpload}
+          className="hidden"
         />
-        <div className="absolute inset-0 bg-black/0 hover:bg-black/50 opacity-100 transition-all duration-300 rounded-full w-[240px] h-[242px]  top-16 ">
+        <div className="absolute inset-0 bg-black/0 hover:bg-black/50 opacity-100 transition-all duration-300 rounded-full w-[240px] h-[242px] top-16">
           <div className="absolute inset-0 flex items-center justify-center text-white font-bold opacity-0 hover:opacity-100 transition-opacity duration-300">
             Edytuj
           </div>
         </div>
       </label>
-      {userData ? (
-        <h1 className="font-bold text-2xl mt-24">
-          Użytkownik : {userData.userName}
-        </h1>
-      ) : (
-        <div className="w-[200px] h-[40px] bg-white rounded-full animate-ping border-2 mt-24" />
-      )}
     </div>
   );
 }

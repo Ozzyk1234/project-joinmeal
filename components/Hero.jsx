@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-export default function Hero() {
+const Hero = () => {
   return (
     <div className="h-screen w-full flex items-center justify-center text-black">
       <div className="w-[90%] h-fit flex md:flex-row flex-col mt-18 md:mt-0 justify-between">
@@ -32,4 +32,6 @@ export default function Hero() {
       </div>
     </div>
   );
-}
+};
+
+export default Hero;

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import NAV_LINKS from "@/consts/Navbar";
+import NAV_LINKS from "../consts/Navbar";
 import Button from "./Buttons/Button";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";

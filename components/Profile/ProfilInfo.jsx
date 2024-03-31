@@ -1,7 +1,30 @@
-import React from "react";
-import { useUserData } from "@/app/Context";
+"use client";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 export default function ProfilInfo() {
-  const { userData } = useUserData();
+  const { data: session } = useSession();
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const res = await fetch(`/api/userDetails/${session?.user?.id}`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+        const data = await res.json();
+        setUserData(data);
+        // Update user image state after fetching user data
+        if (data.picture) {
+          setUserImage(data.picture);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchUserData();
+  }, [session?.user?.id]);
+
   return (
     <div className="w-[100%] h-fit mx-auto items-center flex flex-col">
       <h1 className="text-center text-4xl mt-16">Profil</h1>

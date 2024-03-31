@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-const prisma = await new PrismaClient();
+const prisma = new PrismaClient();
 
 const GET = async (req, { params }) => {
   const userId = await params.userId;
@@ -14,7 +14,6 @@ const GET = async (req, { params }) => {
       },
       select: {
         description: true,
-        picture: true,
         buildingName: true,
         userName: true,
         email: true,
@@ -25,9 +24,9 @@ const GET = async (req, { params }) => {
         createdAt: true,
       },
     });
-    return new NextResponse(JSON.stringify(userData));
+    return NextResponse.json(userData);
   }
-  return new NextResponse(err, { status: 500 });
+  return new NextResponse({ message: "ERROR" }, { status: 500 });
 };
 
 export { GET };
