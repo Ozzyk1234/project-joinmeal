@@ -13,7 +13,7 @@ export default async function Room({ params }) {
     <>
       <div>Pokoj {data.name} </div>
       <div>max sloty {data.slots} </div>
-      <div>uzte {data.useSlots} </div>
+      <div>uzyte {data.useSlots} </div>
       <div>cena {data.cost} </div>
       <div>Utworzono {data.time} </div>
     </>

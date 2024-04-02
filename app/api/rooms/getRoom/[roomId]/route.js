@@ -13,12 +13,15 @@ const GET = async (req, { params }) => {
       select: {
         name: true,
         slots: true,
-        useSlots: true,
         status: true,
         cost: true,
         time: true,
         createdAt: true,
-        UserCreated: true,
+        UserCreated: {
+          select: {
+            userName: true,
+          },
+        },
         users: true,
       },
     });
