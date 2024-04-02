@@ -1,11 +1,11 @@
 "use client";
 
-import DashboardLayout from "@/components/DashboardLayout/DashboardLayout";
-import EditProfile from "@/components/Profile/EditProfile";
-import ProfilInfo from "@/components/Profile/ProfilInfo";
-import ProfilPhoto from "@/components/Profile/ProfilPhoto";
-import ProfileSettings from "@/components/Profile/ProfileSettings";
-import React, { useState } from "react";
+import DashboardLayout from "../../../components/DashboardLayout/DashboardLayout";
+import EditProfile from "../../../components/Profile/EditProfile";
+import ProfilInfo from "../../../components/Profile/ProfilInfo";
+import ProfilPhoto from "../../../components/Profile/ProfilPhoto";
+import ProfileSettings from "../../../components/Profile/ProfileSettings";
+import { useState } from "react";
 
 import { FaGears } from "react-icons/fa6";
 
@@ -13,7 +13,7 @@ export default function Profile() {
   const [profileSettings, OpenProfileSettings] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
 
-  const Handleclose = async () => {
+  const HandleClose = () => {
     setOpenEdit(false);
   };
 
@@ -38,7 +38,7 @@ export default function Profile() {
           {profileSettings && <ProfileSettings onOpen={HandleOpen} />}
           <ProfilPhoto />
 
-          {openEdit ? <EditProfile onclose={Handleclose} /> : <ProfilInfo />}
+          {openEdit ? <EditProfile onClose={HandleClose} /> : <ProfilInfo />}
         </div>
       </div>
     </DashboardLayout>

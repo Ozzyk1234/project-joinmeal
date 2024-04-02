@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 const getRooms = async (page, pageSize) => {
@@ -55,16 +56,18 @@ export default function GetRooms() {
         <>
           <div className="grid grid-cols-4 mx-auto gap-16">
             {rooms.map((room) => (
-              <div
-                key={room.id}
-                className="w-32 h-32 flex flex-col justify-center items-center rounded-lg"
-              >
-                <h1 className="text-center">{room.name}</h1>
-                <h2 className="text-center">{room.cost}</h2>
-              </div>
+              <Link href={`/dashboard/room/${room.id}`}>
+                <div
+                  key={room.id}
+                  className="w-32 h-32 flex flex-col bg-gray-300 justify-center items-center rounded-lg"
+                >
+                  <h1 className="text-center">{room.name}</h1>
+                  <h2 className="text-center">{room.cost}</h2>
+                </div>
+              </Link>
             ))}
           </div>
-          <div className="absolute top-[70%] left-[45%] flex justify-center">
+          <div className="absolute bottom-2 left-[45%] flex justify-center">
             <button
               onClick={prevPage}
               disabled={currentPage === 1}

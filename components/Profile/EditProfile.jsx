@@ -11,13 +11,7 @@ export default function EditProfile({ onClose }) {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (!session?.user?.id) {
-          return; // Return early if session user id is undefined
-        }
         const res = await fetch(`/api/userDetails/${session.user.id}`);
-        if (!res.ok) {
-          throw new Error("Failed to fetch user data");
-        }
         const data = await res.json();
         setUserData(data);
         setFormData(data); // Update formData when userData is available
@@ -65,16 +59,114 @@ export default function EditProfile({ onClose }) {
   return (
     <div className="w-full h-full mx-auto items-center flex flex-col">
       <button onClick={onClose}>
-        <IoMdArrowRoundBack className="absolute top-0 left-0 ml-12 mt-12 text-3xl" />
+        <IoMdArrowRoundBack className="absolute top-[8%] left-[29%] text-3xl" />
       </button>
       <h1 className="text-center text-4xl mt-16">Edytuj dane</h1>
       <div className="flex w-3/5 mt-9 justify-center mx-auto">
         {userData && (
           <form
             onSubmit={handleFormSubmit}
-            className="w-full h-[700px] bg-gray-200 rounded-xl mx-auto flex flex-col items-center justify-center"
+            className="w-[800px] h-[700px] bg-gray-200 rounded-xl mx-auto flex flex-col items-center justify-center"
           >
-            {/* Form Inputs */}
+            <div className=" flex flex-row gap-20 items-center justify-center ">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="firstName" className="-mb-2">
+                  Imię:{" "}
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="..."
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  className="w-56 h-9 pl-2 rounded-lg"
+                />
+                <label htmlFor="lastName" className="-mb-2">
+                  Nazwisko:{" "}
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="..."
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  className="w-56 h-9 pl-2 rounded-lg"
+                />
+                <label htmlFor="userName" className="-mb-2">
+                  Nazwa użytkownika:{" "}
+                </label>
+                <input
+                  type="text"
+                  name="userName"
+                  placeholder="..."
+                  value={formData.userName}
+                  onChange={handleInputChange}
+                  className="w-56 h-9 pl-2 rounded-lg"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="email" className="-mb-2">
+                  E-mail:
+                </label>
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="..."
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-56 h-9 pl-2 rounded-lg"
+                />
+                <label htmlFor="sex" className="-mb-2">
+                  Płeć
+                </label>
+                <input
+                  type="text"
+                  name="sex"
+                  placeholder="..."
+                  value={formData.sex}
+                  onChange={handleInputChange}
+                  className="w-56 h-9 pl-2 rounded-lg"
+                />
+                <label htmlFor="age" className="-mb-2">
+                  Wiek:
+                </label>
+                <input
+                  type="text"
+                  name="age"
+                  placeholder="..."
+                  value={formData.age}
+                  onChange={handleInputChange}
+                  className="w-56 h-9 pl-2 rounded-lg"
+                />
+              </div>
+            </div>
+            <label htmlFor="buildingName" className="mt-2">
+              Budynek:{" "}
+            </label>
+            <input
+              type="text"
+              name="buildingName"
+              placeholder="..."
+              value={formData.buildingName}
+              onChange={handleInputChange}
+              className="w-56 h-9 pl-2 rounded-lg"
+            />
+            <label htmlFor="description" className="mt-9">
+              Opis
+            </label>
+            <textarea
+              name="description"
+              placeholder="..."
+              value={formData.description}
+              onChange={handleInputChange}
+              className="w-[600px] h-[200px] pl-2 rounded-lg resize-none text-justify"
+            />
+            <button
+              type="submit"
+              className="px-5 py-2 w-24 mt-12 h-12 text-white bg-[#0A390C] rounded-lg"
+            >
+              Zapisz
+            </button>
           </form>
         )}
       </div>

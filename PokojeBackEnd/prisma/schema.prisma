@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  userName      String    
+  firstName     String?   @default("BRAK DANYCH")
+  lastName      String?   @default("BRAK DANYCH")
+  picture       Bytes?    
+  age           Int?       @default(0)
+  sex           String?    @default("Mężczyzna")
+  buildingName  String?   @default("DOM STUDENTA 2 - BLIZNIAK")
+  description   String?   @default("Podaj opis użytkownika...")
+  email         String    @unique
+  password      String?
+  createdAt     DateTime  @default(now())
+  rooms         RoomsUsers[]
+  roomsCreated  Room[]
+}
+
+model Room {
+  id             Int        @id @default(autoincrement())
+  idUserCreated  Int       
+  name           String
+  slots          Int
+  useSlots       Int        @default(0)
+  status         Boolean    @default(true)
+  cost           Float?     @default(0.0)
+  time           DateTime
+  createdAt      DateTime   @default(now())
+  UserCreated    User       @relation(fields: [idUserCreated], references: [id])
+  users          RoomsUsers[]
+}
+
+model RoomsUsers {
+  idUser  Int
+  idRoom  Int
+
+  user    User    @relation(fields: [idUser], references: [id])
+  room    Room    @relation(fields: [idRoom], references: [id])
+
+  @@id([idUser, idRoom])
+}

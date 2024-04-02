@@ -5,18 +5,19 @@ const prisma = new PrismaClient();
 
 async function createNewRoom(req, { params }) {
   const body = await req.json();
-  const cost = parseFloat(body.cost);
+
+  const date = body.formattedDate + ":00Z";
+  const milliseconds = Date.parse(date);
+  const Newdate = new Date(milliseconds);
   const Id = params.userId;
-  const userId = parseInt(Id, 10);
-  console.log(body);
   try {
     const newRoom = await prisma.room.create({
       data: {
-        idUserCreated: userId,
+        idUserCreated: parseInt(Id, 10),
         name: body.roomName,
-        slots: body.slots,
-        time: body.time,
-        cost: cost,
+        slots: parseInt(body.slots, 10),
+        time: Newdate,
+        cost: parseFloat(body.cost),
       },
     });
     if (newRoom) {
@@ -30,5 +31,6 @@ async function createNewRoom(req, { params }) {
       await prisma.$disconnect();
     }
   }
+  return NextResponse.json({ message: "Success" });
 }
 export { createNewRoom as POST };

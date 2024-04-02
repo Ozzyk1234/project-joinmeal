@@ -2,16 +2,17 @@
 import React, { useState } from "react";
 import NAV_LINKS from "../consts/Navbar";
 import Button from "./Buttons/Button";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IoMdClose } from "react-icons/io";
 
-export default function Navbar() {
+const Navbar = () => {
   const { data: session } = useSession();
-  const [Open, setOpen] = useState(true);
+  const [open, setOpen] = useState(true);
+
   return (
     <div className="fixed top-0 left-0 w-full">
       <nav className="flex md:flex-row flex-col w-full h-[80px] md:items-center px-9 justify-between font-semibold border-b-2 shadow-lg z-20 bg-white">
@@ -28,14 +29,20 @@ export default function Navbar() {
         </div>
         <div className="md:flex md:flex-row">
           <div
-            onClick={() => setOpen(!Open)}
+            onClick={() => setOpen(!open)}
             className="cursor-pointer text-3xl absolute right-0 top-0 mt-6 mr-4 flex items-center md:hidden"
           >
-            {Open ? <RxHamburgerMenu /> : <IoMdClose />}
+            {open ? (
+              <React.Suspense fallback={null}>
+                <RxHamburgerMenu />
+              </React.Suspense>
+            ) : (
+              <IoMdClose />
+            )}
           </div>
           <ul
             className={`flex flex-col md:flex-row gap-9 pt-9 md:pt-9 pb-9 md:pb-9 md:text-black md:items-center md:static absolute left-0 bg-white md:bg-transparent w-full pl-9 duration-300 transition-all ease-in z-[-10] md:z-0 ${
-              Open ? "top-[-500px]" : "top-20"
+              open ? "top-[-500px]" : "top-20"
             }`}
           >
             {NAV_LINKS.map((link) => (
@@ -67,4 +74,6 @@ export default function Navbar() {
       </nav>
     </div>
   );
-}
+};
+
+export default Navbar;
