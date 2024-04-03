@@ -54,12 +54,12 @@ export default function GetRooms() {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-4 mx-auto gap-16">
+          <div className="md:grid md:grid-cols-4 mx-auto md:gap-16 flex flex-col gap-5">
             {rooms.map((room) => (
-              <Link href={`/dashboard/room/${room.id}`}>
+              <Link key={room.id} href={`/dashboard/room/${room.id}`}>
                 <div
                   key={room.id}
-                  className="w-32 h-32 flex flex-col bg-gray-300 justify-center items-center rounded-lg"
+                  className="w-32 h-32 flex flex-col bg-gray-300 justify-center items-center rounded-full"
                 >
                   <h1 className="text-center">{room.name}</h1>
                   <h2 className="text-center">{room.cost}</h2>
@@ -67,20 +67,20 @@ export default function GetRooms() {
               </Link>
             ))}
           </div>
-          <div className="absolute bottom-2 left-[45%] flex justify-center">
+          <div className="absolute bottom-2 md:left-[45%] left-[30%] flex justify-center">
             <button
               onClick={prevPage}
               disabled={currentPage === 1}
-              className="px-3 py-1 mr-2 bg-blue-500 text-white rounded"
+              className="px-3 py-1 mr-2 bg-[#0A390C] text-white rounded"
             >
-              Previous
+              Poprzednie...
             </button>
             <button
               onClick={nextPage}
               disabled={rooms.length < pageSize}
-              className="px-3 py-1 bg-blue-500 text-white rounded"
+              className="px-3 py-1 bg-[#0A390C] text-white rounded"
             >
-              Next
+              Dalej...
             </button>
           </div>
         </>

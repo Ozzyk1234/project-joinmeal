@@ -1,13 +1,15 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-const prisma = await new PrismaClient();
+const prisma = new PrismaClient();
 
 const POSTUserImage = async (req, { params }) => {
   const userId = params.userId;
   const { result } = await req.json();
+  console.log(userId);
 
   const userIdINT = parseInt(userId, 10);
   const pictureUser = await result;
+  console.log(userIdINT);
 
   const updateImage = await prisma.user.update({
     where: { id: userIdINT },

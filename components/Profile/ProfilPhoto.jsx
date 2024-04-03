@@ -15,12 +15,14 @@ export default function ProfilPhoto() {
         }
         const data = await res.json();
 
+        console.log(data.picture.data);
         if (data.picture) {
-          const userImage = data.picture;
-          const base64Image = Buffer.from(userImage).toString("base64");
-          const encodedImage = atob(base64Image);
-          console.log(encodedImage);
-          setUserImage(encodedImage);
+          const userImage = data.picture.data;
+          const uint8Array = new Uint8Array(userImage);
+          const blob = new Blob([uint8Array], { type: "image/jpeg" });
+          const imageUrl = URL.createObjectURL(blob);
+          console.log(imageUrl);
+          setUserImage(imageUrl);
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -37,14 +39,16 @@ export default function ProfilPhoto() {
     try {
       const response = await fetch(`/api/userImage/${session?.user?.id}`, {
         method: "POST",
-        body: formData,
+        body: JSON.stringify(formData),
       });
-
+      console.log(response);
       if (response.ok) {
         const userData = await response.json();
+        console.log(userData);
         setUserImage(userData.picture);
       } else {
         console.error("Failed to upload image");
+        console.log("Failed to upload image");
       }
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -61,7 +65,7 @@ export default function ProfilPhoto() {
           {userImage ? (
             <div className="w-[240px] h-[240px]">
               <Image
-                src={userImage}
+                src={""}
                 alt="user_photo"
                 width={245}
                 height={245}

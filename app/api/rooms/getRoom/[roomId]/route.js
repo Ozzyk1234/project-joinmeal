@@ -17,6 +17,7 @@ const GET = async (req, { params }) => {
         cost: true,
         time: true,
         createdAt: true,
+        useSlots: true,
         UserCreated: {
           select: {
             userName: true,

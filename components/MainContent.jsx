@@ -19,15 +19,12 @@ export default function MainContent() {
         </div>
       ) : (
         <div>
-          <div className="flex flex-row w-full h-fit items-center justify-end gap-2 pr-2">
+          <div className="flex flex-row w-full h-fit items-center justify-end gap-2 pr-7">
             <button
               onClick={handleOpen}
               className="rounded-lg text-white bg-[#0A390C] py-2 px-3"
             >
               Utwórz pokój
-            </button>
-            <button className="rounded-lg text-white bg-[#0A390C] py-2 px-3">
-              Twoje pokoje
             </button>
           </div>
           <h1 className="text-4xl text-center mt-9">Dostępne pokoje</h1>

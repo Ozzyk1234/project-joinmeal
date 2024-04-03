@@ -46,7 +46,7 @@ async function exitFromRoom(idUser, idRoom) {
     });
     if (userExited) {
       if (await decrementSlots(idRoom)) {
-        return true;
+        return NextResponse.json({ message: true });
       }
     }
     return false;
@@ -70,7 +70,7 @@ async function joinToRoom(idUser, idRoom) {
     });
     if (userJoined) {
       if (await increaseSlots(idRoom)) {
-        return true;
+        return NextResponse.json({ message: false });
       }
     }
     return false;
@@ -136,4 +136,20 @@ async function decrementSlots(roomId) {
   }
 }
 
-export { POST };
+const GET = async (req, { params }) => {
+  const userId = parseInt(params.userId);
+  const roomId = parseInt(params.roomId);
+  const userExistsInRoom = await prisma.roomsUsers.findFirst({
+    where: {
+      idUser: userId,
+      idRoom: roomId,
+    },
+  });
+  if (userExistsInRoom) {
+    return NextResponse.json({ message: true });
+  } else {
+    return NextResponse.json({ message: false });
+  }
+};
+
+export { POST, GET };

@@ -1,5 +1,20 @@
--- AlterTable
-ALTER TABLE "User" ALTER COLUMN "sex" DROP NOT NULL;
+-- CreateTable
+CREATE TABLE "User" (
+    "id" SERIAL NOT NULL,
+    "userName" TEXT NOT NULL,
+    "firstName" TEXT DEFAULT 'BRAK DANYCH',
+    "lastName" TEXT DEFAULT 'BRAK DANYCH',
+    "picture" BYTEA,
+    "age" INTEGER DEFAULT 0,
+    "sex" TEXT DEFAULT 'Mężczyzna',
+    "buildingName" TEXT DEFAULT 'DOM STUDENTA 2 - BLIZNIAK',
+    "description" TEXT DEFAULT 'Podaj opis użytkownika...',
+    "email" TEXT NOT NULL,
+    "password" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Room" (
@@ -23,6 +38,9 @@ CREATE TABLE "RoomsUsers" (
 
     CONSTRAINT "RoomsUsers_pkey" PRIMARY KEY ("idUser","idRoom")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- AddForeignKey
 ALTER TABLE "Room" ADD CONSTRAINT "Room_idUserCreated_fkey" FOREIGN KEY ("idUserCreated") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
