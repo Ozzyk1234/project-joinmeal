@@ -24,7 +24,6 @@ export default function EditProfile({ onClose }) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log("Input changed:", name, value);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -33,7 +32,6 @@ export default function EditProfile({ onClose }) {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
     if (session?.user?.id) {
       try {
         const response = await fetch(`/api/updateProfile/${session.user.id}`, {
@@ -45,8 +43,7 @@ export default function EditProfile({ onClose }) {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log("Dane zaktualizowane:", data);
-          onClose(); // Close the form after updating data
+          onClose();
         } else {
           console.error("Błąd podczas aktualizacji danych");
         }

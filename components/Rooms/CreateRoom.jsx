@@ -16,7 +16,7 @@ export default function CreateRoom({ onClose }) {
     if (session?.user?.id) {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/rooms/createRoom/${session.user.id}`,
+          `/api/rooms/createRoom/${session.user.id}`,
           {
             method: "POST",
             headers: {

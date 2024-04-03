@@ -4,9 +4,7 @@ import React, { useState, useEffect } from "react";
 
 const getRooms = async (page, pageSize) => {
   try {
-    const res = await fetch(
-      `http://localhost:3000/api/rooms/getRooms/${page}/${pageSize}`
-    );
+    const res = await fetch(`/api/rooms/getRooms/${page}/${pageSize}`);
     if (!res.ok) {
       throw new Error("Failed to fetch rooms data");
     }
