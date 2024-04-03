@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Room({ params }) {
   const [data, setData] = useState();
   const [remainingTime, setRemainingTime] = useState("");
-  const [intervalId, setIntervalId] = useState(null); // Dodajemy stan do przechowywania ID interwału
+  const [intervalId, setIntervalId] = useState(null);
   const roomId = params.roomId;
   const { data: session } = useSession();
   const userId = session?.user?.id;
@@ -18,28 +18,24 @@ export default function Room({ params }) {
       const res = await fetch(`/api/rooms/getRoom/${roomId}`);
       const data = await res.json();
       setData(data.room);
-      startTimer(data.room.time); // Rozpoczynamy odliczanie po pobraniu danych
+      startTimer(data.room.time);
     };
 
     fetchData();
 
-    // Zatrzymujemy odliczanie po opuszczeniu komponentu
     return () => clearInterval(intervalId);
   }, [roomId]);
 
-  // Funkcja rozpoczynająca odliczanie czasu
   const startTimer = (endTime) => {
     const interval = setInterval(() => {
       const now = new Date();
       const end = new Date(endTime);
       const difference = end - now;
 
-      // Jeśli czas upłynął, zatrzymujemy odliczanie
       if (difference <= 0) {
         clearInterval(interval);
         setRemainingTime("Czas minął");
       } else {
-        // Konwersja różnicy czasu na godziny, minuty i sekundy
         const hours = Math.floor(difference / (1000 * 60 * 60));
         const minutes = Math.floor(
           (difference % (1000 * 60 * 60)) / (1000 * 60)
@@ -48,7 +44,7 @@ export default function Room({ params }) {
         setRemainingTime(`${hours}h ${minutes}m ${seconds}s`);
       }
     }, 1000);
-    setIntervalId(interval); // Zapisujemy ID interwału w stanie komponentu
+    setIntervalId(interval);
   };
 
   function formatDate(isoDate) {
