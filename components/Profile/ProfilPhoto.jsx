@@ -53,6 +53,7 @@ export default function ProfilPhoto() {
       }
     };
     reader.readAsDataURL(file);
+    window.location.reload();
   };
 
   return (
