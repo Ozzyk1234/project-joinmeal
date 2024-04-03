@@ -15,9 +15,7 @@ export default function Room({ params }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(
-        `http://localhost:3000/api/rooms/getRoom/${roomId}`
-      );
+      const res = await fetch(`/api/rooms/getRoom/${roomId}`);
       const data = await res.json();
       setData(data.room);
       startTimer(data.room.time); // Rozpoczynamy odliczanie po pobraniu danych
