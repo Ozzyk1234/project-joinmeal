@@ -21,16 +21,16 @@ async function createNewRoom(req, { params }) {
       },
     });
     if (newRoom) {
-      return NextResponse.json({ message: "success" });
+      return NextResponse.json(true);
     }
   } catch (error) {
     console.error("Błąd podczas dodawania nowego pokoju do bazy:", error);
-    return false;
+    return NextResponse.json(false);
   } finally {
     if (prisma.$isConnected) {
       await prisma.$disconnect();
     }
   }
-  return NextResponse.json({ message: "Success" });
+  return NextResponse.json(true);
 }
 export { createNewRoom as POST };
