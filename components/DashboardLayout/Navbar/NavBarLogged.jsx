@@ -32,7 +32,7 @@ export default function NavBarLogged() {
 
         <div className="flex flex-row items-center gap-12 relative">
           <div className="w-10 h-10 items-center flex rounded-full">
-            <NavbarPhoto userImage={userImage} />
+            {/* <NavbarPhoto userImage={userImage} /> */}
           </div>
         </div>
       </div>

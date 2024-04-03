@@ -6,9 +6,7 @@ export default function JoinButton({ userId, roomId, Joinexit }) {
 
   useEffect(() => {
     const fetchAnswer = async () => {
-      const res = await fetch(
-        `http://localhost:3000/api/rooms/joinroom/${userId}/${roomId}`
-      );
+      const res = await fetch(`/api/rooms/joinroom/${userId}/${roomId}`);
       const data = await res.json();
       setData(data);
     };

@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 
 export default function ProfilPhoto() {
   const { data: session } = useSession();
-  const [userImage, setUserImage] = useState(null);
+  const [userImage, setUserImage] = useState("");
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -15,12 +15,11 @@ export default function ProfilPhoto() {
         }
         const data = await res.json();
 
-        console.log(data.picture.data);
         if (data.picture) {
           const userImage = data.picture;
           const base64Image = Buffer.from(userImage).toString("base64");
           const encodedImage = atob(base64Image);
-          console.log(encodedImage);
+          //console.log(encodedImage);
           setUserImage(encodedImage);
         }
       } catch (error) {
@@ -32,26 +31,28 @@ export default function ProfilPhoto() {
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append("image", file);
 
-    try {
-      const response = await fetch(`/api/userImage/${session?.user?.id}`, {
-        method: "POST",
-        body: formData,
-      });
-      console.log(response);
-      if (response.ok) {
-        const userData = await response.json();
-        console.log(userData);
-        setUserImage(userData.picture);
-      } else {
-        console.error("Failed to upload image");
-        console.log("Failed to upload image");
+    const reader = new FileReader();
+    reader.onload = async function (event) {
+      const image = event.target.result;
+
+      try {
+        const response = await fetch(`/api/userImage/${session?.user?.id}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ picture: image }), // Sending the image as JSON data
+        });
+        if (!response.ok) {
+          throw new Error("Failed to upload image");
+        }
+        // Handle success if needed
+      } catch (error) {
+        console.error("Error uploading image:", error);
       }
-    } catch (error) {
-      console.error("Error uploading image:", error);
-    }
+    };
+    reader.readAsDataURL(file);
   };
 
   return (

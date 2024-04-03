@@ -4,23 +4,19 @@ const prisma = new PrismaClient();
 
 const POSTUserImage = async (req, { params }) => {
   const userId = params.userId;
-  const { result } = await req.json();
-  console.log(userId);
-
   const userIdINT = parseInt(userId, 10);
-  const pictureUser = await result;
-  console.log(userIdINT);
-  console.log(result);
+  const { picture } = await req.json(); // Assuming you send the image data as { picture: imageDataURL }
+
   const updateImage = await prisma.user.update({
     where: { id: userIdINT },
     data: {
-      picture: btoa(pictureUser),
+      picture: btoa(picture),
     },
   });
 
   if (updateImage) {
     prisma.$disconnect();
-    return new NextResponse({ success: true }, { status: 200 });
+    return NextResponse.json({ message: true }, { status: 200 });
   }
 };
 

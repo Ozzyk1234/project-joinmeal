@@ -42,7 +42,6 @@ export default function EditProfile({ onClose }) {
           body: JSON.stringify(formData),
         });
         if (response.ok) {
-          const data = await response.json();
           onClose();
         } else {
           console.error("Błąd podczas aktualizacji danych");
