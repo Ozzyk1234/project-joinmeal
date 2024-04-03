@@ -10,7 +10,7 @@ const POSTUserImage = async (req, { params }) => {
   const userIdINT = parseInt(userId, 10);
   const pictureUser = await result;
   console.log(userIdINT);
-
+  console.log(result);
   const updateImage = await prisma.user.update({
     where: { id: userIdINT },
     data: {
