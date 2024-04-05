@@ -45,10 +45,10 @@ export default function Room({ params }) {
   }
 
   const handleJoining = async () => {
-    const isJoined = await fetch(
-      `http://localhost:3000/api/rooms/joinroom/${userId}/${roomId}`,
-      { method: "POST", headers: { "Content-Type": "application/json" } }
-    );
+    const isJoined = await fetch(`/api/rooms/joinroom/${userId}/${roomId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
     if (isJoined.ok) {
       window.location.reload();
       return "success";
