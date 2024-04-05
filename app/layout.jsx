@@ -15,9 +15,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="w-full h-screen bg-gray-100 bg-no-repeat bg-cover font-Poppins">
-        <AuthProvider>{children}</AuthProvider>
-        <Analytics mode={"production"} />;
-        <SpeedInsights />
+        <AuthProvider>
+          {children}
+          <Analytics mode={"production"} />;
+          <SpeedInsights />
+        </AuthProvider>
       </body>
     </html>
   );
