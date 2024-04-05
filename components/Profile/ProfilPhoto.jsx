@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 export default function ProfilPhoto() {
   const { data: session } = useSession();
   const [userImage, setUserImage] = useState("");
-const userId = session?.data?.id;
+const userId = session?.user?.id;
 
   useEffect(() => {
     const fetchUserData = async () => {
