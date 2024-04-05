@@ -30,10 +30,11 @@ const Hero = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
-                incidunt quisquam dignissimos, mollitia deleniti eum adipisci
-                ipsa placeat modi asperiores, expedita blanditiis. Distinctio
-                itaque non quas maiores mollitia perspiciatis qui!
+                Jesteś mieszkańcem domu publicznego takiego jak akademik?
+                Szukasz wspólnika do przygotowania wspólnego posiłku, lub chcesz
+                dołączyć się do przygotowania jakiegoś dania? W takim wypadku
+                dobrze trafiłeś! Aplikacja Joinmeal umożliwia wszystkie
+                wcześniej wymienione czynności!
               </motion.h3>
             </AnimatePresence>
           </div>
