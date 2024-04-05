@@ -36,6 +36,16 @@ const Hero = () => {
                 dobrze trafiłeś! Aplikacja Joinmeal umożliwia wszystkie
                 wcześniej wymienione czynności!
               </motion.h3>
+              <div className="w-full mt-9 text-end">
+                <motion.button
+                  initial={{ opacity: 0, y: 100 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="bg-[#0A390C] px-7 py-4 text-white font-semibold  border-2 rounded-lg"
+                >
+                  Czytaj dalej...
+                </motion.button>
+              </div>
             </AnimatePresence>
           </div>
         </div>
