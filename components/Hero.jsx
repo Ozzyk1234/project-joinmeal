@@ -11,16 +11,14 @@ const Hero = () => {
             <AnimatePresence mode="wait">
               <motion.h2
                 className="text-2xl font-semibold text-center md:text-start"
-                initial={{ opacity: 0, x: -100 }}
+                initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 1, delay: 0.5 }}
               >
                 Pysznie, tanio, wspólnie...
               </motion.h2>
 
               <motion.h1
-                initial={{ width: "0%", visibility: "hidden" }} // Initial styles before animation starts
-                animate={{ width: "100%", visibility: "visible" }} // Target styles during animation
                 transition={{ duration: 1, delay: 0.5 }}
                 className="animate-typing overflow-hidden whitespace-nowrap border-r-4 border-r-black text-8xl font-semibold mt-4 text-center md:text-start"
               >
@@ -30,7 +28,7 @@ const Hero = () => {
                 className="text-xl text-justify mt-9 md:text-start"
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
               >
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
                 incidunt quisquam dignissimos, mollitia deleniti eum adipisci
