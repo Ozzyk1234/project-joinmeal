@@ -13,13 +13,13 @@ const Hero = () => {
                 className="text-2xl font-semibold text-center md:text-start"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 0.5 }}
+                transition={{ duration: 1, delay: 0.1 }}
               >
                 Pysznie, tanio, wspólnie...
               </motion.h2>
 
               <motion.h1
-                transition={{ duration: 1, delay: 0.5 }}
+                transition={{ duration: 1, delay: 1.5 }}
                 className="animate-typing overflow-hidden whitespace-nowrap border-r-4 border-r-black text-8xl font-semibold mt-4 text-center md:text-start"
               >
                 JoinMeal
@@ -28,7 +28,7 @@ const Hero = () => {
                 className="text-xl text-justify mt-9 md:text-start"
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
                 incidunt quisquam dignissimos, mollitia deleniti eum adipisci
