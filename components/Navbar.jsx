@@ -8,7 +8,7 @@ import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const { data: session } = useSession();
