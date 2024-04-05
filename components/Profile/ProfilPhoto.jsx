@@ -5,11 +5,12 @@ import { useSession } from "next-auth/react";
 export default function ProfilPhoto() {
   const { data: session } = useSession();
   const [userImage, setUserImage] = useState("");
+const userId = session?.user?.id;
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await fetch(`/api/userImage/${session?.user?.id}`);
+        const res = await fetch(`/api/userImage/${userId}`);
         if (!res.ok) {
           throw new Error("Failed to fetch user data");
         }
