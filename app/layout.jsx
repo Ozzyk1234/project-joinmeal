@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./Providers";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
       <body className="w-full h-screen bg-gray-100 bg-no-repeat bg-cover font-Poppins">
         <AuthProvider>{children}</AuthProvider>
         <Analytics mode={"production"} />;
+        <SpeedInsights />
       </body>
     </html>
   );
