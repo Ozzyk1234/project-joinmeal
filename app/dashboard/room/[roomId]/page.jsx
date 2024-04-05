@@ -3,49 +3,34 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import JoinButton from "../../../../components/Buttons/JoinButton";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import RemoveRoomButton from "../../../../components/Buttons/RemoveRoomButton";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Room({ params }) {
   const [data, setData] = useState();
-  const [remainingTime, setRemainingTime] = useState("");
-  const [intervalId, setIntervalId] = useState(null);
   const roomId = params.roomId;
   const { data: session } = useSession();
   const userId = session?.user?.id;
+  const [isOwner, setIsOwner] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`/api/rooms/getRoom/${roomId}`);
       const data = await res.json();
       setData(data.room);
-      startTimer(data.room.time);
+    };
+    const checkOwner = async () => {
+      if (data) {
+        const roomOwner = data.UserCreated.id;
+        setIsOwner(roomOwner === userId);
+      }
     };
 
     fetchData();
-
-    return () => clearInterval(intervalId);
-  }, [roomId]);
-
-  const startTimer = (endTime) => {
-    const interval = setInterval(() => {
-      const now = new Date();
-      const end = new Date(endTime);
-      const difference = end - now;
-
-      if (difference <= 0) {
-        clearInterval(interval);
-        setRemainingTime("Czas minął");
-      } else {
-        const hours = Math.floor(difference / (1000 * 60 * 60));
-        const minutes = Math.floor(
-          (difference % (1000 * 60 * 60)) / (1000 * 60)
-        );
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-        setRemainingTime(`${hours}h ${minutes}m ${seconds}s`);
-      }
-    }, 1000);
-    setIntervalId(interval);
-  };
+    checkOwner();
+  }, [roomId, data, userId]);
 
   function formatDate(isoDate) {
     const date = new Date(isoDate);
@@ -70,6 +55,10 @@ export default function Room({ params }) {
     }
   };
 
+  const handleBack = async () => {
+    router.push("/dashboard");
+  };
+
   return (
     <>
       {data && (
@@ -81,22 +70,26 @@ export default function Room({ params }) {
                 {data.useSlots}/{data.slots}
               </div>
             </div>
-            <Link
-              href={`/dashboard`}
+            <button
+              onClick={handleBack}
               className="absolute top-0 left-0 mt-9 ml-9 text-4xl bg-white rounded-full border-2 border-black"
             >
               <IoMdArrowRoundBack />
-            </Link>
+            </button>
             <div className="text-2xl ml-9">Cena: {data.cost} zł </div>
-            <JoinButton
-              roomId={roomId}
-              userId={userId}
-              Joinexit={handleJoining}
-            />
+            {isOwner ? (
+              <RemoveRoomButton roomId={roomId} userId={userId} />
+            ) : (
+              <JoinButton
+                roomId={roomId}
+                userId={userId}
+                Joinexit={handleJoining}
+              />
+            )}
+
             <div className="absolute bottom-0 left-0 mb-9 ml-9">
               <div>Utworzono {formatDate(data.createdAt)} </div>
               <div>Data Zakończenia: {formatDate(data.time)} </div>
-              <div>Pozostały czas: {remainingTime}</div>
             </div>
           </div>
         </div>

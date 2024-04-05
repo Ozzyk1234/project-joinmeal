@@ -21,6 +21,7 @@ const GET = async (req, { params }) => {
         UserCreated: {
           select: {
             userName: true,
+            id: true,
           },
         },
         users: true,

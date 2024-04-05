@@ -16,6 +16,7 @@ async function createNewRoom(req, { params }) {
         idUserCreated: parseInt(Id, 10),
         name: body.roomName,
         slots: parseInt(body.slots, 10),
+        useSlots: 1,
         time: Newdate,
         cost: parseFloat(body.cost),
       },
@@ -33,4 +34,8 @@ async function createNewRoom(req, { params }) {
   }
   return NextResponse.json(true);
 }
+
+const AddRoomOwner = async (req, { params }) => {
+  const userId = params.userId;
+};
 export { createNewRoom as POST };
