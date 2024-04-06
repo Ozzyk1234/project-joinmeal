@@ -8,20 +8,26 @@ const GET = async (req, { params }) => {
   const intUserId = parseInt(userId, 10);
 
   if (intUserId) {
-    const allItems = await prisma.item.findMany({
+    const allItems = await prisma.item.findmany({
       where: {
         status: true,
-        idUser: intUserId
+        idUser: intUserId,
       },
     });
 
     if (allItems) {
       return NextResponse.json(allItems);
     } else {
-      return new NextResponse({ message: "Nie znaleziono przedmiotów dla użytkownika" }, { status: 404 });
+      return new NextResponse(
+        { message: "Nie znaleziono przedmiotów dla użytkownika" },
+        { status: 404 }
+      );
     }
   } else {
-    return new NextResponse({ message: "Nieprawidłowy identyfikator użytkownika" }, { status: 400 });
+    return new NextResponse(
+      { message: "Nieprawidłowy identyfikator użytkownika" },
+      { status: 400 }
+    );
   }
 };
 
