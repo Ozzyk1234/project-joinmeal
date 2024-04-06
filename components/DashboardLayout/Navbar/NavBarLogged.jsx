@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import NavbarPhoto from "./NavbarPhoto";
@@ -22,8 +21,8 @@ export default function NavBarLogged() {
   }, [session?.user?.id]);
 
   return (
-    <div className="flex w-full h-16 items-center justify-center fixed">
-      <div className="flex flex-row items-center w-[80%] h-16 border-b-2 shadow justify-between px-4">
+    <div className="flex w-full h-16 items-center justify-center fixed z-[9999] bg-gray-200">
+      <div className="flex flex-row items-center md:w-[80%] w-full h-16 border-b-2 shadow justify-between px-4">
         <div>
           <Link href="/dashboard">
             <h1 className="text-2xl font-bold text-[#0A390C]">JoinMeal</h1>

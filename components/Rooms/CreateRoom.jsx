@@ -39,7 +39,7 @@ export default function CreateRoom({ onClose }) {
 
   return (
     <>
-      <div className="flex flex-col mt-9">
+      <div className="flex flex-col md:mt-9">
         <button onClick={onClose}>
           <IoMdArrowRoundBack className="ml-9 text-3xl" />
         </button>

@@ -65,18 +65,18 @@ export default function GetRooms() {
               </Link>
             ))}
           </div>
-          <div className="absolute bottom-2 md:left-[45%] left-[30%] flex justify-center">
+          <div className="absolute bottom-2 md:left-[45%] left-[30%] flex justify-center ">
             <button
               onClick={prevPage}
               disabled={currentPage === 1}
-              className="px-3 py-1 mr-2 bg-[#0A390C] text-white rounded"
+              className="px-3 py-1 mr-2 bg-[#0A390C] text-white rounded -z-1"
             >
               Poprzednie...
             </button>
             <button
               onClick={nextPage}
               disabled={rooms.length < pageSize}
-              className="px-3 py-1 bg-[#0A390C] text-white rounded"
+              className="px-3 py-1 bg-[#0A390C] text-white rounded -z-1"
             >
               Dalej...
             </button>

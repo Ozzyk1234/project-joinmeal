@@ -11,7 +11,7 @@ export default function MainContent() {
     setCreateMode(true);
   };
   return (
-    <div className="w-[80%] h-screen border-r-[1px] border-l-[1px] border-gray-200 ml-[10%] pt-24 flex flex-col">
+    <div className="md:w-[80%] w-full h-screen border-r-[1px] border-l-[1px] border-gray-200 md:ml-[10%] pt-24 flex flex-col">
       {isCreateMode ? (
         <div>
           <h1 className="text-4xl text-center mt-16">Utwórz pokój</h1>
