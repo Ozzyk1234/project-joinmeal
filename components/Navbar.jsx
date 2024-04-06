@@ -27,8 +27,8 @@ const Navbar = () => {
             <Image
               src="/logo1.png"
               alt="Logo"
-              width={50}
-              height={10}
+              width={40}
+              height={40}
               className="text-left mt-3 ml-[-10px] md:ml-0 md:mt-0"
             />
           </Link>
@@ -52,12 +52,11 @@ const Navbar = () => {
             }`}
           >
             {NAV_LINKS.map((link) => (
-              <li
-                key={link.href}
-                className="cursor-pointer relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-black after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
-              >
-                {link.label}
-              </li>
+              <Link key={link.href} href={link.href}>
+                <li className="cursor-pointer relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-black after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center">
+                  {link.label}
+                </li>
+              </Link>
             ))}
 
             {session ? (
