@@ -12,7 +12,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-2xl border-[1px] border-gray-400 p-9 h-[200px] bg-white rounded-lg w-[28%] flex flex-col justify-center items-center"
+            className="-z-1 text-2xl border-[1px] border-gray-400 p-9 h-[200px] bg-white rounded-lg w-[28%] flex flex-col justify-center items-center"
           >
             Dołączanie do posiłków
             <motion.div

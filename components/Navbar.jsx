@@ -15,7 +15,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <div className="fixed top-0 left-0 w-full">
+    <div className="fixed top-0 left-0 w-full z-[9999]">
       <motion.nav
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
