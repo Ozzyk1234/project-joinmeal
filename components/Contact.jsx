@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Duru_Sans } from "next/font/google";
 
 export default function Contact() {
   return (

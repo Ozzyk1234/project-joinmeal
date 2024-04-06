@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 const Hero = () => {
   return (
     <div className="h-screen w-full flex items-center justify-center text-black">
-      <div className="w-[90%] h-fit flex md:flex-row flex-col mt-18 md:mt-0 justify-between">
-        <div className="flex flex-col items-center justify-center md:max-w-[40%] md:ml-28 mt-[-20px]">
-          <div className="flex flex-col text-left ">
+      <div className="md:w-[90%] w-full h-fit flex md:flex-row flex-col mt-18 md:mt-0 justify-between ml-[20%]">
+        <div className="flex flex-col items-center justify-center w-[80%] md:max-w-[40%] md:ml-28 mt-[-20px] ">
+          <div className="flex flex-col md:text-left text-center">
             <motion.h2
               className="text-2xl font-semibold text-center md:text-start"
               initial={{ opacity: 0, x: -50 }}
@@ -19,12 +19,12 @@ const Hero = () => {
 
             <motion.h1
               transition={{ duration: 1, delay: 1.5 }}
-              className="animate-typing overflow-hidden whitespace-nowrap border-r-4 border-r-black text-8xl font-semibold mt-4 text-center md:text-start"
+              className="animate-typing overflow-hidden whitespace-nowrap md:border-r-4 md:border-r-black text-7xl md:text-8xl font-semibold md:mt-4 text-center md:text-start"
             >
               JoinMeal
             </motion.h1>
             <motion.h3
-              className="text-xl text-justify mt-9 md:text-start"
+              className="text-md md:text-xl text-justify mt-9 md:text-start"
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}

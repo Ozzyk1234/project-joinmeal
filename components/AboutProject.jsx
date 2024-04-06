@@ -4,12 +4,12 @@ import { motion, useScroll } from "framer-motion";
 export default function AboutProject() {
   return (
     <>
-      <div id="aboutproject" className="-mt-40" />
-      <div className="w-full h-fit mt-40">
+      <div id="aboutproject" className="-mt-36 md:-mt-40" />
+      <div className="w-full h-fit md:mt-40">
         <h1 className="text-center text-5xl">O projekcie</h1>
 
-        <div className="flex flex-row w-[80%] mx-auto h-fit mt-16 justify-between gap-32 p-16">
-          <div className="w-[50%] mx-auto text-justify">
+        <div className="flex md:flex-row flex-col md:w-[80%] mx-auto h-fit mt-16 justify-between gap-32 p-16">
+          <div className="md:w-[50%] mx-auto text-justify">
             <motion.p
               whileInView={{ opacity: 1, x: 0 }}
               initial={{ opacity: 0, x: -100 }}
@@ -41,7 +41,7 @@ export default function AboutProject() {
             initial={{ opacity: 0, x: 100 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="w-[50%] mx-auto my-auto"
+            className="md:w-[50%] mx-auto my-auto"
           >
             <Image
               src={"/chef.png"}
@@ -52,29 +52,30 @@ export default function AboutProject() {
             />
           </motion.div>
         </div>
-        <div className="flex flex-row w-[80%] mx-auto h-fit mt-16 justify-between gap-32 p-16">
+        <div className="flex md:flex-row flex-col md:w-[80%] mx-auto h-fit mt-16 justify-between gap-32 p-16">
           <motion.div
             whileInView={{ opacity: 1, x: 0 }}
             initial={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="w-[50%] mx-auto"
+            className="md:w-[50%] mx-auto"
           >
             <Image
               src={"/people.png"}
               alt={"Young-People"}
               priority
               width={700}
-              height={650}
+              height={500}
+              className="hidden md:inline"
             />
           </motion.div>
-          <div className="w-[50%] mx-auto text-justify">
+          <div className="md:w-[50%] mx-auto text-justify">
             <motion.p
               whileInView={{ opacity: 1, x: 0 }}
               initial={{ opacity: 0, x: 100 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-md"
+              className="text-md -mt-56 md:-mt-0"
             >
               JoinMeal to więcej niż tylko aplikacja – to idea, która łączy
               ludzi wokół stołu, by razem odkrywać smakowe tajemnice i kreować
