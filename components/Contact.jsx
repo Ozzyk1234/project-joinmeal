@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { Duru_Sans } from "next/font/google";
 
 export default function Contact() {
   return (
@@ -6,7 +8,12 @@ export default function Contact() {
       <div id="contact" className="-mt-40" />
       <div className="w-full h-fit mt-40">
         <h1 className="text-center text-5xl pt-16">Kontakt</h1>
-        <div className="shadow-lg p-5 rounded-lg border-t-4 border-[#0A390C] w-[350px] md:w-[500px] bg-white mx-auto mt-16">
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="shadow-lg p-5 rounded-lg border-t-4 border-[#0A390C] w-[350px] md:w-[500px] bg-white mx-auto mt-16"
+        >
           <h1 className="text-xl font-bold my-4 text-center">Napisz do nas!</h1>
           <form onSubmit={""} className="flex flex-col">
             <label htmlFor="email" className="mt-3">
@@ -38,7 +45,7 @@ export default function Contact() {
               Wyślij!
             </button>
           </form>
-        </div>
+        </motion.div>
       </div>
     </>
   );
