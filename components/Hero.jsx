@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const Hero = () => {
   return (
     <div className="h-screen w-full flex items-center justify-center text-black">
-      <div className="md:w-[90%] w-full h-fit flex md:flex-row flex-col mt-18 md:mt-0 justify-between ml-[20%]">
+      <div className="md:w-[90%] w-full h-fit flex md:flex-row flex-col mt-18 md:mt-0 justify-between">
         <div className="flex flex-col items-center justify-center w-[80%] md:max-w-[40%] md:ml-28 mt-[-20px] ">
           <div className="flex flex-col md:text-left text-center">
             <motion.h2
