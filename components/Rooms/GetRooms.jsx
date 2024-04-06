@@ -65,7 +65,7 @@ export default function GetRooms() {
               </Link>
             ))}
           </div>
-          <div className="absolute bottom-2 md:left-[45%] left-[30%] flex justify-center ">
+          <div className="absolute bottom-2 md:left-[45%] left-[30%] flex justify-center -z-2">
             <button
               onClick={prevPage}
               disabled={currentPage === 1}
