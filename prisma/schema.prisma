@@ -28,6 +28,7 @@ model User {
   createdAt     DateTime  @default(now())
   rooms         RoomsUsers[]
   roomsCreated  Room[]
+  items         Item[]
 }
 
 model Room {
@@ -52,4 +53,15 @@ model RoomsUsers {
   room    Room    @relation(fields: [idRoom], references: [id])
 
   @@id([idUser, idRoom])
+}
+
+model Item {
+  id Int @id @default(autoincrement())
+  idUser Int 
+  name String
+  cost Float
+  status Boolean
+  expiryDate DateTime
+  createdAt DateTime @default(now())
+  user User @relation(fields: [idUser], references: [id])
 }
