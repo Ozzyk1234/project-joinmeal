@@ -12,6 +12,7 @@ export default function Contact() {
           initial={{ opacity: 0, x: 100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
           className="shadow-lg p-5 rounded-lg border-t-4 border-[#0A390C] w-[350px] md:w-[500px] bg-white mx-auto mt-16 "
         >
           <h1 className="text-xl font-bold my-4 text-center">Napisz do nas!</h1>
