@@ -5,7 +5,7 @@ export default function AboutProject() {
   return (
     <>
       <div id="aboutproject" className="-mt-36 md:-mt-40" />
-      <div className="w-full h-fit md:mt-40">
+      <div className="w-full h-fit md:mt-40 relative overflow-x-hidden">
         <h1 className="text-center text-5xl">O projekcie</h1>
 
         <div className="flex md:flex-row flex-col md:w-[80%] mx-auto h-fit mt-16 justify-between gap-32 p-16">
