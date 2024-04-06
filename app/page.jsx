@@ -1,14 +1,15 @@
 "use client";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import { AnimatePresence } from "framer-motion";
+import AboutProject from "../components/AboutProject";
+import Services from "../components/Services";
 export default function Home() {
   return (
     <main className="w-full h-screen">
-      <AnimatePresence mode={"wait"}>
-        <Navbar />
-        <Hero />
-      </AnimatePresence>
+      <Navbar />
+      <Hero />
+      <AboutProject />
+      <Services />
     </main>
   );
 }
