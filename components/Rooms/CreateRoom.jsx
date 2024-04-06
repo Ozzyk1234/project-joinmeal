@@ -41,11 +41,11 @@ export default function CreateRoom({ onClose }) {
     <>
       <div className="flex flex-col md:mt-9">
         <button onClick={onClose}>
-          <IoMdArrowRoundBack className="ml-9 text-3xl" />
+          <IoMdArrowRoundBack className="md:ml-9 ml-4 -mt-24 md:mt-9 text-3xl" />
         </button>
         <form
           onSubmit={handleFormSubmit}
-          className="w-[800px] h-[500px] bg-gray-200 rounded-xl mx-auto flex flex-col items-center justify-center"
+          className="md:w-[800px] md:h-[500px] w-[90%] h-[500px] bg-gray-200 rounded-xl mx-auto flex flex-col items-center justify-center mt-24 md:mt-0"
         >
           <label htmlFor="roomName">Nazwa pokoju</label>
           <input
