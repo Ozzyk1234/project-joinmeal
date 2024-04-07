@@ -21,7 +21,7 @@ export default function NavBarLogged() {
   }, [session?.user?.id]);
 
   return (
-    <div className="flex w-full h-16 items-center justify-center fixed z-[9999] ">
+    <div className="flex w-full h-16 items-center justify-center fixed z-[20] ">
       <div className="flex flex-row items-center md:w-[80%] bg-gray-200 w-full h-16 border-b-2 shadow justify-between px-4">
         <div>
           <Link href="/dashboard">

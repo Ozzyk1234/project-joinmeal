@@ -13,6 +13,7 @@ export default function Room({ params }) {
   const { data: session } = useSession();
   const userId = session?.user?.id;
   const [isOwner, setIsOwner] = useState(false);
+  const [isFree, setIsFree] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,7 +28,14 @@ export default function Room({ params }) {
         setIsOwner(roomOwner === userId);
       }
     };
-
+    const checkSlots = async () => {
+      if (data) {
+        const usedslots = data.useSlots;
+        const awailableslots = data.slots;
+        setIsFree(usedslots < awailableslots);
+      }
+    };
+    checkSlots();
     fetchData();
     checkOwner();
   }, [roomId, data, userId]);
@@ -59,6 +67,22 @@ export default function Room({ params }) {
     router.push("/dashboard");
   };
 
+  const handleslots = () => {
+    if (data.useSlots >= data.slots) {
+      return (
+        <div className="text-2xl flex justify-center items-center pt-16 pr-16 text-white bg-[#A92424] absolute md:-top-24 md:-right-24 -top-24 -right-24 w-52 h-52 6 border-2 border-white rounded-full">
+          {data.useSlots}/{data.slots}
+        </div>
+      );
+    } else {
+      return (
+        <div className="text-2xl flex justify-center items-center pt-16 pr-16 text-white bg-[#0A390C] absolute md:-top-24 md:-right-24 -top-24 -right-24 w-52 h-52 6 border-2 border-white rounded-full">
+          {data.useSlots}/{data.slots}
+        </div>
+      );
+    }
+  };
+
   return (
     <>
       {data && (
@@ -66,9 +90,7 @@ export default function Room({ params }) {
           <div>
             <h1 className="text-4xl text-center mt-16">Pokoj {data.name} </h1>
             <div className="w-full md:flex md:flex-row justify-end">
-              <div className="text-2xl flex justify-center items-center pt-16 pr-16 text-white bg-[#0A390C] absolute md:-top-24 md:-right-24 -top-24 -right-24 w-52 h-52 6 border-2 border-white rounded-full">
-                {data.useSlots}/{data.slots}
-              </div>
+              {handleslots()}
             </div>
             <button
               onClick={handleBack}
@@ -76,17 +98,20 @@ export default function Room({ params }) {
             >
               <IoMdArrowRoundBack />
             </button>
-            <div className="text-2xl ml-9">Cena: {data.cost} zł </div>
             {isOwner ? (
               <RemoveRoomButton roomId={roomId} userId={userId} />
             ) : (
-              <JoinButton
-                roomId={roomId}
-                userId={userId}
-                Joinexit={handleJoining}
-              />
+              isFree && (
+                <JoinButton
+                  roomId={roomId}
+                  userId={userId}
+                  Joinexit={handleJoining}
+                />
+              )
             )}
-
+            <div className="text-2xl ml-9 text-center mt-16">
+              Cena: {data.cost} zł{" "}
+            </div>
             <div className="absolute bottom-0 left-0 mb-9 ml-9">
               <div>Utworzono {formatDate(data.createdAt)} </div>
               <div>Data Zakończenia: {formatDate(data.time)} </div>

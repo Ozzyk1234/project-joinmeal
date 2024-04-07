@@ -13,7 +13,7 @@ export default function SideBar() {
   const [open, setOpen] = useState(false);
   return (
     <div
-      className={`md:w-[10%] w-[40%] h-screen bg-black fixed top-0 text-white flex flex-col items-center border-r-2 border-black transition-all duration-500  ${
+      className={`md:w-[10%] w-[40%] h-screen bg-black fixed top-0 text-white flex flex-col items-center border-r-2 border-black transition-all duration-500 z-30  ${
         open ? "left-0" : "md:left-[-10%] left-[-40%]"
       }`}
     >
