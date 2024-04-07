@@ -3,16 +3,22 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-const POST = async (req, res) => {
-  const { idUser, name, expiryDate, cost } = req.body;
-
+const createNewItem = async (req, res) => {
+  const body = await req.json();
+  const idUser = body.idUser
+  const name = body.name
+  const expiryDate = body.expiryDate
+  const cost =  body.cost ? body.cost : 0
+  const date = expiryDate + ":00Z";
+  const milliseconds = Date.parse(date);
+  const Newdate = new Date(milliseconds);
   try {
     const itemAdded = await prisma.item.create({
       data: {
         idUser: parseInt(idUser),
-        name,
-        expiryDate,
-        cost: cost ? cost : 0,
+        name: name,
+        expiryDate: Newdate,
+        cost: cost,
       },
     });
 
@@ -35,4 +41,4 @@ const POST = async (req, res) => {
   }
 };
 
-export { POST };
+export { createNewItem as POST };
