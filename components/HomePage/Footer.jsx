@@ -3,8 +3,12 @@ import React from "react";
 export default function Footer() {
   return (
     <>
-      <div className="mt-32" />
-      <div className="w-full h-[200px] bg-gray-300"></div>
+      <footer className="footer bg-gray-300 w-full">
+        <p className="text-center">
+          &copy; {new Date().getFullYear()} JoinMeal. Wszelkie prawa
+          zastrzeżone.
+        </p>
+      </footer>
     </>
   );
 }
