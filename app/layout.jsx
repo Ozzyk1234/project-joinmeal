@@ -13,11 +13,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className="scroll-smooth"
+      style={{ scrollBehavior: "smooth" }}
+    >
       <body className="w-full h-screen bg-gray-100 bg-no-repeat bg-cover font-Poppins">
         <AuthProvider>
           {children}
-          <Analytics mode={"production"} />;
+          <Analytics mode={"production"} />
           <SpeedInsights />
         </AuthProvider>
       </body>

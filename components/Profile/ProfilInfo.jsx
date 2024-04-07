@@ -26,10 +26,10 @@ export default function ProfilInfo() {
   }, [session?.user?.id]);
 
   return (
-    <div className="w-[100%] h-fit mx-auto items-center flex flex-col">
+    <div className="w-full h-fit mx-auto items-center flex flex-col">
       <h1 className="text-center text-4xl mt-16">Profil</h1>
       {userData ? (
-        <div className="flex flex-row w-[60%] justify-between gap-12 mx-auto mt-16">
+        <div className="flex md:flex-row flex-col md:w-[60%] justify-between gap-12 mx-auto mt-16">
           <ul className="flex flex-col gap-5">
             <li>Imię: {userData.firstName}</li>
             <li>Nazwisko: {userData.lastName}</li>

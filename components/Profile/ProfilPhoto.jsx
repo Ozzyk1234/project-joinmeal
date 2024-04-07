@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 export default function ProfilPhoto() {
   const { data: session } = useSession();
   const [userImage, setUserImage] = useState("");
-const userId = session?.user?.id;
+  const userId = session?.user?.id;
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -20,7 +20,6 @@ const userId = session?.user?.id;
           const userImage = data.picture;
           const base64Image = Buffer.from(userImage).toString("base64");
           const encodedImage = atob(base64Image);
-          //console.log(encodedImage);
           setUserImage(encodedImage);
         }
       } catch (error) {
@@ -58,24 +57,34 @@ const userId = session?.user?.id;
   };
 
   return (
-    <div className="border-r-[1px] border-gray-500 bg-gray-200 flex flex-col w-[30%] items-center">
+    <div className="border-r-[1px] border-gray-500 bg-gray-200 flex flex-col md:w-[30%] w-[40%] items-center">
       <label
         htmlFor="fileInput"
-        className="cursor-pointer relative h-[240px] w-[240px]"
+        className="cursor-pointer md:relative md:h-[240px] md:w-[240px] -z-1"
       >
-        <div className="rounded-full border-2 border-black overflow-hidden mt-16">
+        <div className="rounded-full border-2 border-black overflow-hidden mt-16 w-[100px] h-[100px] md:w-fit md:h-fit">
           {userImage ? (
-            <div className="w-[240px] h-[240px]">
+            <div className="md:w-[240px] md:h-[240px]">
               <Image
                 src={userImage}
                 alt="user_photo"
                 width={245}
                 height={245}
                 priority
+                className="hidden md:inline"
+              />
+              <Image
+                src={userImage}
+                alt="user_photo"
+                width={100}
+                height={100}
+                priority
+                className="md:hidden"
               />
             </div>
           ) : (
-            <div className="w-[250px] h-[250px] bg-white rounded-full animate-ping"></div>
+            // <div className="w-[250px] h-[250px] bg-white rounded-full animate-ping"></div>
+            <p></p>
           )}
         </div>
 
@@ -87,7 +96,7 @@ const userId = session?.user?.id;
           onChange={handleFileUpload}
           className="hidden"
         />
-        <div className="absolute inset-0 bg-black/0 hover:bg-black/50 opacity-100 transition-all duration-300 rounded-full w-[240px] h-[242px] top-16">
+        <div className="absolute inset-0 bg-black/0 hover:bg-black/50 opacity-100 transition-all duration-300 rounded-full md:w-[240px] md:h-[242px] w-[100px] h-[100px] md:top-16 top-32 ml-[5%]">
           <div className="absolute inset-0 flex items-center justify-center text-white font-bold opacity-0 hover:opacity-100 transition-opacity duration-300">
             Edytuj
           </div>

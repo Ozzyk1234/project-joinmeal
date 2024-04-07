@@ -24,7 +24,7 @@ export default function Profile() {
   return (
     <DashboardLayout>
       <div className="w-[100%] h-screen bg-gray-1 items-center flex flex-col pt-16">
-        <div className="flex flex-row h-screen w-[80%] border-r-[1px] border-l-[1px] border-gray-300">
+        <div className="flex flex-row h-screen md:w-[80%] w-full md:border-r-[1px] md:border-l-[1px] md:border-gray-300">
           <button
             onClick={() =>
               profileSettings
@@ -32,7 +32,7 @@ export default function Profile() {
                 : OpenProfileSettings(true)
             }
           >
-            <FaGears className="absolute mt-20 mr-52 text-3xl top-0 right-0" />
+            <FaGears className="absolute md:mt-20 md:mr-52 mt-20 mr-5 text-3xl top-0 right-0" />
           </button>
 
           {profileSettings && <ProfileSettings onOpen={HandleOpen} />}

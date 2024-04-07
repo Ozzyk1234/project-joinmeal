@@ -55,14 +55,14 @@ export default function EditProfile({ onClose }) {
   return (
     <div className="w-full h-full mx-auto items-center flex flex-col">
       <button onClick={onClose}>
-        <IoMdArrowRoundBack className="absolute top-[8%] left-[29%] text-3xl" />
+        <IoMdArrowRoundBack className="absolute md:top-[8%] md:left-[29%] mt-4 -ml-52 text-3xl" />
       </button>
       <h1 className="text-center text-4xl mt-16">Edytuj dane</h1>
       <div className="flex w-3/5 mt-9 justify-center mx-auto">
         {userData && (
           <form
             onSubmit={handleFormSubmit}
-            className="w-[800px] h-[700px] bg-gray-200 rounded-xl mx-auto flex flex-col items-center justify-center"
+            className="md:w-[800px] md:h-[700px] w-[150%] p-9 md:p-0 bg-gray-200 rounded-xl mx-auto flex flex-col items-center justify-center"
           >
             <div className=" flex flex-row gap-20 items-center justify-center ">
               <div className="flex flex-col gap-2">
@@ -75,7 +75,7 @@ export default function EditProfile({ onClose }) {
                   placeholder="..."
                   value={formData.firstName}
                   onChange={handleInputChange}
-                  className="w-56 h-9 pl-2 rounded-lg"
+                  className="md:w-56 w-36 h-9 pl-2 rounded-lg"
                 />
                 <label htmlFor="lastName" className="-mb-2">
                   Nazwisko:{" "}
@@ -86,7 +86,7 @@ export default function EditProfile({ onClose }) {
                   placeholder="..."
                   value={formData.lastName}
                   onChange={handleInputChange}
-                  className="w-56 h-9 pl-2 rounded-lg"
+                  className="md:w-56 w-36 h-9 pl-2 rounded-lg"
                 />
                 <label htmlFor="userName" className="-mb-2">
                   Nazwa użytkownika:{" "}
@@ -97,7 +97,7 @@ export default function EditProfile({ onClose }) {
                   placeholder="..."
                   value={formData.userName}
                   onChange={handleInputChange}
-                  className="w-56 h-9 pl-2 rounded-lg"
+                  className="md:w-56 w-36 h-9 pl-2 rounded-lg"
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -110,7 +110,7 @@ export default function EditProfile({ onClose }) {
                   placeholder="..."
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-56 h-9 pl-2 rounded-lg"
+                  className="md:w-56 w-36 h-9 pl-2 rounded-lg"
                 />
                 <label htmlFor="sex" className="-mb-2">
                   Płeć
@@ -121,7 +121,7 @@ export default function EditProfile({ onClose }) {
                   placeholder="..."
                   value={formData.sex}
                   onChange={handleInputChange}
-                  className="w-56 h-9 pl-2 rounded-lg"
+                  className="md:w-56 w-36 h-9 pl-2 rounded-lg"
                 />
                 <label htmlFor="age" className="-mb-2">
                   Wiek:
@@ -132,7 +132,7 @@ export default function EditProfile({ onClose }) {
                   placeholder="..."
                   value={formData.age}
                   onChange={handleInputChange}
-                  className="w-56 h-9 pl-2 rounded-lg"
+                  className="md:w-56 w-36 h-9 pl-2 rounded-lg"
                 />
               </div>
             </div>
@@ -145,7 +145,7 @@ export default function EditProfile({ onClose }) {
               placeholder="..."
               value={formData.buildingName}
               onChange={handleInputChange}
-              className="w-56 h-9 pl-2 rounded-lg"
+              className="md:w-56 w-36 h-9 pl-2 rounded-lg"
             />
             <label htmlFor="description" className="mt-9">
               Opis
@@ -155,7 +155,7 @@ export default function EditProfile({ onClose }) {
               placeholder="..."
               value={formData.description}
               onChange={handleInputChange}
-              className="w-[600px] h-[200px] pl-2 rounded-lg resize-none text-justify"
+              className="md:w-[600px] md:h-[200px] pl-2 rounded-lg resize-none text-justify"
             />
             <button
               type="submit"

@@ -8,8 +8,6 @@ const POST = async (req, { params }) => {
   const intUserId = parseInt(userId, 10);
   const body = await req.json();
 
-  console.log(body);
-
   if (!intUserId) {
     return new NextResponse("Invalid user ID", { status: 400 });
   }

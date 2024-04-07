@@ -9,9 +9,6 @@ const RemoveRoom = async (req) => {
   const Iduser = parseInt(url.searchParams.get("userId"), 10);
   const Idroom = parseInt(url.searchParams.get("roomId"), 10);
 
-  console.log(Iduser);
-  console.log(Idroom);
-
   const isOwner = await prisma.room.findUnique({
     where: { id: Idroom, idUserCreated: Iduser },
   });

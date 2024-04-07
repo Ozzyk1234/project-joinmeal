@@ -30,7 +30,6 @@ const GET = async (req, { params }) => {
 
     return NextResponse.json({ room: uniqueRoom }, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ message: error }, { status: 500 });
   }
 };
