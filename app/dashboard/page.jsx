@@ -1,5 +1,5 @@
 import React from "react";
-import MainContent from "../../components/MainContent";
+import MainContent from "../../components/Rooms/MainContent";
 import DashboardLayout from "../../components/DashboardLayout/DashboardLayout";
 export default function Dashboard() {
   return (

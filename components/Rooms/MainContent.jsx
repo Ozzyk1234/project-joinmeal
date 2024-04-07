@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import GetRooms from "../components/Rooms/GetRooms";
-import CreateRoom from "../components/Rooms/CreateRoom";
+import GetRooms from "./GetRooms";
+import CreateRoom from "./CreateRoom";
 export default function MainContent() {
   const [isCreateMode, setCreateMode] = useState(false);
   const handleClose = async () => {

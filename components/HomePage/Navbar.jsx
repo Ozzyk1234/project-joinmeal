@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import NAV_LINKS from "../consts/Navbar";
-import Button from "./Buttons/Button";
+import NAV_LINKS from "../../consts/Navbar";
+import Button from "../Buttons/Button";
 import Image from "next/image";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
