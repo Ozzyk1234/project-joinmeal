@@ -8,6 +8,7 @@ import { PiCookingPot } from "react-icons/pi";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function SideBar() {
   const [open, setOpen] = useState(false);
@@ -23,10 +24,13 @@ export default function SideBar() {
           <IoHomeOutline />
           Strona główna
         </li>
-        <li className="flex flex-row gap-2 items-center cursor-pointer">
+        <Link
+          href="dashboard/fridge"
+          className="flex flex-row gap-2 items-center cursor-pointer"
+        >
           <RiFridgeFill />
           Lodówka
-        </li>
+        </Link>
         <li className="flex flex-row gap-2 items-center cursor-pointer">
           <CgProfile />
           Profil
