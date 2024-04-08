@@ -1,4 +1,3 @@
-import React from "react";
 import NavBarLogged from "./Navbar/NavBarLogged";
 import SideBar from "./SideBar";
 import Messages from "./Messages";

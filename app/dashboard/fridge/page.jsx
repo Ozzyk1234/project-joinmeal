@@ -21,9 +21,7 @@ const Fridge = () => {
   const handleDeleteProduct = (id) => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3000/api/fridge/removeItem/${id}`
-        );
+        const response = await fetch(`/api/fridge/removeItem/${id}`);
         const data = await response.json();
         setProducts(data);
       } catch (error) {
@@ -36,41 +34,54 @@ const Fridge = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3000/api/fridge/showallitems/${session.user.id}`
-        );
-
-        const data = await response.json();
-        setProducts(data);
-        setCheckPush(true);
+        if (session) {
+          const response = await fetch(
+            `/api/fridge/showallitems/${session.user.id}`
+          );
+          const data = await response.json();
+          setProducts(data);
+          setCheckPush(true);
+        }
       } catch (error) {
-        console.error("Błąd podczas pobierania danych:");
+        console.error("Błąd podczas pobierania danych:", error);
       }
     };
 
     fetchData();
-  }, [products]);
+  }, [session]);
 
   useEffect(() => {
-    products.map((product) => {
-      const expiryDateTime = new Date(product.expiryDate).getTime();
-      const currentTime = Date.now();
+    const checkExpiryDates = () => {
+      if (products.length > 0) {
+        products.forEach((product) => {
+          const expiryDateTime = new Date(product.expiryDate).getTime();
+          const currentTime = Date.now();
 
-      const differenceInMilliseconds = expiryDateTime - currentTime;
-      const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
-      const date = new Date(product.expiryDate).toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      });
+          const differenceInMilliseconds = expiryDateTime - currentTime;
+          const differenceInDays =
+            differenceInMilliseconds / (1000 * 60 * 60 * 24);
+          const date = new Date(product.expiryDate).toLocaleDateString(
+            undefined,
+            {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            }
+          );
 
-      if (differenceInDays <= 3) {
-        toast.error(
-          "Mija/minął termin ważności produktu:" + product.name + " " + date
-        );
+          if (differenceInDays <= 3) {
+            toast.error(
+              `Mija/minął termin ważności produktu: ${product.name} ${date}`
+            );
+          }
+        });
       }
-    });
-  }, [checkPush]);
+    };
+
+    if (checkPush) {
+      checkExpiryDates();
+    }
+  }, [products, checkPush]);
 
   return (
     <DashboardLayout>
