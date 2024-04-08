@@ -21,24 +21,26 @@ export default function Room({ params }) {
       const res = await fetch(`/api/rooms/getRoom/${roomId}`);
       const data = await res.json();
       setData(data.room);
+
+      const checkOwner = async () => {
+        if (data) {
+          const roomOwner = data.room.UserCreated.id;
+          setIsOwner(roomOwner === userId);
+        }
+      };
+      const checkSlots = async () => {
+        if (data) {
+          const usedslots = data.room.useSlots;
+          const awailableslots = data.room.slots;
+          setIsFree(usedslots < awailableslots);
+        }
+      };
+      checkOwner();
+      checkSlots();
     };
-    const checkOwner = async () => {
-      if (data) {
-        const roomOwner = data.UserCreated.id;
-        setIsOwner(roomOwner === userId);
-      }
-    };
-    const checkSlots = async () => {
-      if (data) {
-        const usedslots = data.useSlots;
-        const awailableslots = data.slots;
-        setIsFree(usedslots < awailableslots);
-      }
-    };
-    checkSlots();
+
     fetchData();
-    checkOwner();
-  }, [roomId, data, userId]);
+  }, [roomId, userId]);
 
   function formatDate(isoDate) {
     const date = new Date(isoDate);

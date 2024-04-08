@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 
 const getRooms = async (page, pageSize) => {
   try {
@@ -65,20 +67,20 @@ export default function GetRooms() {
               </Link>
             ))}
           </div>
-          <div className="absolute bottom-2 md:left-[45%] left-[30%] flex justify-center -z-2">
+          <div className="absolute bottom-2 m-0 p-0 left-0 w-full flex justify-center -z-2">
             <button
               onClick={prevPage}
               disabled={currentPage === 1}
               className="px-3 py-1 mr-2 bg-[#0A390C] text-white rounded -z-1"
             >
-              Poprzednie...
+              <FaArrowLeft />
             </button>
             <button
               onClick={nextPage}
               disabled={rooms.length < pageSize}
               className="px-3 py-1 bg-[#0A390C] text-white rounded -z-1"
             >
-              Dalej...
+              <FaArrowRight />
             </button>
           </div>
         </>

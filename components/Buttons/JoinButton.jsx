@@ -11,7 +11,7 @@ export default function JoinButton({ userId, roomId, Joinexit }) {
       setData(data);
     };
     fetchAnswer();
-  });
+  }, [roomId, userId]);
 
   const checkJoining = () => {
     if (data) {

@@ -15,7 +15,7 @@ export default function NavbarPhoto({ userImage }) {
     const encodedImage = atob(base64Image);
 
     return (
-      <div className="w-10 h-10 overflow-hidden rounded-full">
+      <div className="w-10 h-10 overflow-hidden rounded-full border-black border-[1px]">
         <Image
           src={encodedImage}
           alt="User Image"

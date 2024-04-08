@@ -22,7 +22,7 @@ export default function NavBarLogged() {
 
   return (
     <div className="flex w-full h-16 items-center justify-center fixed z-[20] ">
-      <div className="flex flex-row items-center md:w-[80%] bg-gray-200 w-full h-16 border-b-2 shadow justify-between px-4">
+      <div className="flex flex-row items-center md:w-[80%] bg-white w-full h-16 border-b-2 shadow justify-between px-4">
         <div>
           <Link href="/dashboard">
             <h1 className="text-2xl font-bold text-[#0A390C]">JoinMeal</h1>
