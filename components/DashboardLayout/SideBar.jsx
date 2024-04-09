@@ -8,10 +8,14 @@ import { PiCookingPot } from "react-icons/pi";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { signOut } from "next-auth/react";
-import Link from "next/link";
-
+import { useRouter } from "next/navigation";
 export default function SideBar() {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  const handlefridge = async () => {
+    router.push(`/dashboard/fridge`);
+  };
   return (
     <div
       className={`md:w-[10%] w-[40%] h-screen bg-black fixed top-0 text-white flex flex-col items-center border-r-2 border-black transition-all duration-500 z-30  ${
@@ -24,13 +28,13 @@ export default function SideBar() {
           <IoHomeOutline />
           Strona główna
         </li>
-        <Link
-          href="dashboard/fridge"
+        <button
+          onClick={() => handlefridge()}
           className="flex flex-row gap-2 items-center cursor-pointer"
         >
           <RiFridgeFill />
           Lodówka
-        </Link>
+        </button>
         <li className="flex flex-row gap-2 items-center cursor-pointer">
           <CgProfile />
           Profil
