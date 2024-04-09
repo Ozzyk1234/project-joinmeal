@@ -96,7 +96,7 @@ export default function ProfilPhoto() {
           onChange={handleFileUpload}
           className="hidden"
         />
-        <div className="absolute inset-0 bg-black/0 hover:bg-black/50 opacity-100 transition-all duration-300 rounded-full md:w-[240px] md:h-[242px] w-[100px] h-[100px] md:top-16 top-32 ml-[5%]">
+        <div className="absolute inset-0 bg-black/0 hover:bg-black/50 opacity-100 transition-all duration-300 rounded-full md:w-[240px] md:h-[242px] w-[100px] h-[100px] md:top-16 top-32 md:ml-[1%] ml-[4%]">
           <div className="absolute inset-0 flex items-center justify-center text-white font-bold opacity-0 hover:opacity-100 transition-opacity duration-300">
             Edytuj
           </div>
