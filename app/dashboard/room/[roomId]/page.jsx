@@ -55,7 +55,7 @@ export default function Room({ params }) {
   }
 
   const handleJoining = async () => {
-    const isJoined = await fetch(`/api/rooms/joinroom/${userId}/${roomId}`, {
+    const isJoined = await fetch(`api/rooms/joinroom/${userId}/${roomId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
