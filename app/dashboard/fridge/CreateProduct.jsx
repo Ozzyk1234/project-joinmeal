@@ -24,7 +24,7 @@ export default function CreateProduct({ onClose }) {
     e.preventDefault();
 
     try {
-      const response = await fetch(`api/fridge/addItem`, {
+      const response = await fetch(`/api/fridge/addItem`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
