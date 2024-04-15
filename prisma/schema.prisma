@@ -65,3 +65,10 @@ model Item {
   createdAt DateTime    @default(now())
   user User             @relation(fields: [idUser], references: [id])
 }
+
+model Kitchen {
+  id       Int      @id @default(autoincrement())
+  slots    Int
+  buildingName String
+}
+
