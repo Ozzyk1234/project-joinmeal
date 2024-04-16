@@ -18,8 +18,6 @@ export default function KitchenSelected({ params }) {
     fetchusers();
   }, [kitchenId]);
 
-  console.log(usersInKitchen.length);
-
   return (
     <DashboardLayout>
       <div className="w-[80%] h-screen border-r-[1px] border-l-[1px] border-gray-200 ml-[10%] pt-24 flex flex-col items-center">
