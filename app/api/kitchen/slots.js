@@ -74,9 +74,11 @@ module.exports = {
 
 // Oto kilka podejść:
 
-// Użycie stanu lokalnego w komponencie: Jeśli userInKitchenList jest częścią stanu komponentu, to każda zmiana stanu spowoduje ponowne renderowanie komponentu, co automatycznie zaktualizuje widok. Możesz użyć useState do przechowywania userInKitchenList i useEffect, aby wykryć zmiany w tych danych i zaktualizować interfejs użytkownika.
+// Użycie stanu lokalnego w komponencie: Jeśli userInKitchenList jest częścią stanu komponentu, to każda zmiana stanu spowoduje ponowne renderowanie komponentu, 
+// co automatycznie zaktualizuje widok. Możesz użyć useState do przechowywania userInKitchenList i useEffect, aby wykryć zmiany w tych danych i zaktualizować interfejs użytkownika.
 
-// Użycie globalnego stanu: Jeśli userInKitchenList jest współdzielony między wieloma komponentami, można użyć narzędzi do zarządzania stanem, takich jak Redux lub Context API, aby przechowywać te dane w globalnym stanie. Wtedy zmiana tych danych w jednym komponencie spowoduje automatyczne zaktualizowanie wszystkich komponentów, które korzystają z tych danych.
+// Użycie globalnego stanu: Jeśli userInKitchenList jest współdzielony między wieloma komponentami, 
+// można użyć narzędzi do zarządzania stanem, takich jak Redux lub Context API, aby przechowywać te dane w globalnym stanie. Wtedy zmiana tych danych w jednym komponencie spowoduje automatyczne zaktualizowanie wszystkich komponentów, które korzystają z tych danych.
 
 // Użycie mechanizmów serwerowych: Jeśli userInKitchenList jest uzyskiwane z serwera, na przykład za pomocą żądań API, możesz użyć funkcji getServerSideProps lub getStaticProps do dynamicznego pobierania tych danych przy każdym żądaniu lub generowaniu strony. W ten sposób zapewnisz, że strona zawsze będzie aktualizowana na podstawie najnowszych danych.
 

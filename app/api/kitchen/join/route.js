@@ -1,28 +1,49 @@
 // localhost:3000/api/kitchen/join
 // {
-//   "idUser":1,
-//   "idKitchen":2,
-//   "time":2 
+//   "idUser": 1,
+//   "idKitchen": 1,
+//   "dateToEnd":"2024-04-16T12:00"
 // }
 
+import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-const {addUserToKitchen} = require('../slots');
 
-const kitchenJoin = async (req, res) => {
+const prisma = new PrismaClient();
+
+const joinToKitchen = async (req, res) => {
   const body = await req.json();
   const idUser = parseInt(body.idUser)
   const idKitchen = parseInt(body.idKitchen)
-  const time = parseInt(body.time)
+  const expiryDate = body.dateToEnd
+  const date = expiryDate + ":00Z";
+  const milliseconds = Date.parse(date);
+  const Newdate = new Date(milliseconds);
   try {
-    await addUserToKitchen(idKitchen, idUser, time);
-    return NextResponse.json({ success: true });
+    const itemAdded = await prisma.userInKitchen.create({
+      data: {
+        idUser: idUser,
+        idKitchen: idKitchen,
+        dateToEnd: Newdate,
+      },
+    });
+
+    if (itemAdded) {
+      return NextResponse.json({ success: true });
+    } else {
+      return new NextResponse(
+        { message: "Nie udało się dolaczyc do kuchni" },
+        { status: 500 }
+      );
+    }
   } catch (error) {
-    console.error("Błąd:", error);
+    console.error("Błąd podczas dolaczania do kuchni:", error);
     return new NextResponse(
-      { message: "Wystąpił błąd" },
+      { message: "Wystąpił błąd podczas dolacznia do kuchni" },
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect();
   }
 };
 
-export { kitchenJoin as POST };
+export { joinToKitchen as POST };

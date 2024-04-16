@@ -29,6 +29,7 @@ model User {
   rooms         RoomsUsers[]
   roomsCreated  Room[]
   items         Item[]
+  userInKitchen UserInKitchen[]
 }
 
 model Room {
@@ -67,8 +68,21 @@ model Item {
 }
 
 model Kitchen {
-  id       Int      @id @default(autoincrement())
-  slots    Int
-  buildingName String
+  id             Int      @id @default(autoincrement())
+  slots          Int
+  floor          Int
+  buildingName   String
+  userInKitchen  UserInKitchen[]
 }
 
+model UserInKitchen {
+  id             Int      @id @default(autoincrement())
+  idUser         Int
+  idKitchen      Int
+  dateToEnd      DateTime
+  
+  user           User     @relation(fields: [idUser], references: [id])
+  kitchen        Kitchen  @relation(fields: [idKitchen], references: [id])
+  
+  @@unique([idUser, idKitchen])
+}
