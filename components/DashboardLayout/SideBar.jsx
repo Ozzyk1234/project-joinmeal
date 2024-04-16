@@ -7,6 +7,8 @@ import { LiaUserFriendsSolid } from "react-icons/lia";
 import { PiCookingPot } from "react-icons/pi";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
+import { FaKitchenSet } from "react-icons/fa6";
+
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 export default function SideBar() {
@@ -15,6 +17,10 @@ export default function SideBar() {
 
   const handlefridge = async () => {
     router.push(`/dashboard/fridge`);
+  };
+
+  const handleKitchen = async () => {
+    router.push(`/dashboard/kitchen`);
   };
   return (
     <div
@@ -34,6 +40,13 @@ export default function SideBar() {
         >
           <RiFridgeFill />
           Lodówka
+        </button>
+        <button
+          onClick={() => handleKitchen()}
+          className="flex flex-row gap-2 items-center cursor-pointer"
+        >
+          <FaKitchenSet />
+          Kuchnia
         </button>
         <li className="flex flex-row gap-2 items-center cursor-pointer">
           <CgProfile />
