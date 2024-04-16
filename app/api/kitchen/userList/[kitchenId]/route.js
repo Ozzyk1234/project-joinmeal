@@ -1,15 +1,25 @@
-//localhost:3000/api/kitchen/userList/2
-import { NextResponse } from "next/server";
-const {getUserInKitchenList} = require('../../slots');
+//localhost:3000/api/kitchen/userList/1
 
-const GET = async (req, { params }) => {
-    const kitchenId = await parseInt(params.kitchenId);
-    const userInKitchen = await getUserInKitchenList(kitchenId);
+import { PrismaClient } from "@prisma/client";
+import { NextResponse } from "next/server";
+
+const prisma = new PrismaClient();
+
+const GET = async (req, res) => {
+  try {
+    const userInKitchen = await prisma.userInKitchen.findMany();
     if (userInKitchen.length > 0) {
       return NextResponse.json(userInKitchen);
     } else {
-        return NextResponse.json([])
+      return NextResponse.json([]);
     }
+  } catch (error) {
+    console.error("Błąd:", error);
+    return new NextResponse(
+      { message: "Wystąpił błąd podczas pobierania danych z bazy." },
+      { status: 500 }
+    );
+  }
 };
 
 export { GET };
