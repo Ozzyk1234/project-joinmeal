@@ -22,6 +22,9 @@ export default function SideBar() {
   const handleKitchen = async () => {
     router.push(`/dashboard/kitchen`);
   };
+  const handleRecipe = async () => {
+    router.push(`/dashboard/recipe`);
+  };
   return (
     <div
       className={`md:w-[10%] w-[40%] h-screen bg-black fixed top-0 text-white flex flex-col items-center border-r-2 border-black transition-all duration-500 z-30  ${
@@ -56,10 +59,13 @@ export default function SideBar() {
           <LiaUserFriendsSolid />
           Znajomi
         </li>
-        <li className="flex flex-row gap-2 items-center cursor-pointer">
+        <button
+          onClick={handleRecipe}
+          className="flex flex-row gap-2 items-center cursor-pointer"
+        >
           <PiCookingPot />
           Przepisy
-        </li>
+        </button>
         {open ? (
           <MdOutlineArrowBackIosNew
             className=" cursor-pointer absolute top-[50%] left-[92%] w-9 h-9 p-1  text-xl bg-white rounded-full text-black"
