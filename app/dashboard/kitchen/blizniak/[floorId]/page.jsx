@@ -55,7 +55,7 @@ export default function KitchenSelected({ params }) {
   return (
     <DashboardLayout>
       <div className="w-[80%] h-screen border-r-[1px] border-l-[1px] border-gray-200 ml-[10%] pt-24 flex flex-col items-center">
-        {usersInKitchen[0] && <div>0/{usersInKitchen[0].slots}</div>}
+        {usersInKitchen[0] && <div>3/{usersInKitchen[0].slots}</div>}
         <div className="w-[100%] flex justify-end">
           <button className="bg-[#0A390C] px-4 py-2 text-white rounded-lg flex mr-9 ">
             Zarezerwuj miejsce
