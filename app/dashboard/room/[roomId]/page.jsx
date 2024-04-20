@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import JoinButton from "../../../../components/Buttons/JoinButton";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import RemoveRoomButton from "../../../../components/Buttons/RemoveRoomButton";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Room({ params }) {
