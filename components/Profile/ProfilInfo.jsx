@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 export default function ProfilInfo() {
   const { data: session } = useSession();
   const [userData, setUserData] = useState(null);
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -25,6 +24,25 @@ export default function ProfilInfo() {
     fetchUserData();
   }, [session?.user?.id]);
 
+  const handleAge = () => {
+    if (userData) {
+      const date = new Date();
+      const date2 = new Date(userData.age);
+      const year = date.getFullYear();
+      const year2 = date2.getFullYear();
+      const currentAge = year - year2;
+      console.log(currentAge);
+      return (
+        <ul className="flex flex-col gap-5 text-sm">
+          <li className="text-gray-600">
+            Wiek <br />
+            <p className="text-lg text-black">{currentAge}</p>
+          </li>
+        </ul>
+      );
+    }
+  };
+
   return (
     <div className="w-full h-full flex flex-col bg-white shadow-lg p-5 rounded-lg border-t-4 border-[#0A390C]">
       <h1 className="text-4xl mt-16">Profil</h1>
@@ -44,12 +62,8 @@ export default function ProfilInfo() {
                 <p className="text-lg text-black">{userData.lastName}</p>
               </li>
             </ul>
-            <ul className="flex flex-col gap-5 text-sm">
-              <li className="text-gray-600">
-                Wiek <br />
-                <p className="text-lg text-black">{userData.age}</p>
-              </li>
-            </ul>
+
+            {handleAge()}
           </div>
           <ul className="flex flex-col gap-5 text-sm">
             <li className="text-gray-600">
