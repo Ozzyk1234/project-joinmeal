@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import ProfilInfo from "./ProfilInfo";
 
 export default function ProfilPhoto() {
   const { data: session } = useSession();
@@ -57,12 +58,12 @@ export default function ProfilPhoto() {
   };
 
   return (
-    <div className="border-r-[1px] border-gray-500 bg-gray-200 flex flex-col md:w-[30%] w-[40%] items-center">
+    <div className="border-r-[1px] border-gray-500 bg-[url('/Broccolibg.jpg')] flex flex-col md:w-[50%] w-[40%] items-center">
       <label
         htmlFor="fileInput"
         className="cursor-pointer md:relative md:h-[240px] md:w-[240px] -z-1"
       >
-        <div className="rounded-full border-2 border-black overflow-hidden mt-16 w-[100px] h-[100px] md:w-fit md:h-fit">
+        <div className="rounded-full border-2 border-gray-400 overflow-hidden mt-16 w-[100px] h-[100px] md:w-fit md:h-fit">
           {userImage ? (
             <div className="md:w-[240px] md:h-[240px]">
               <Image
@@ -102,6 +103,7 @@ export default function ProfilPhoto() {
           </div>
         </div>
       </label>
+      <ProfilInfo />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { IoMdArrowRoundBack } from "react-icons/io";
 import { useSession } from "next-auth/react";
 
 export default function EditProfile({ onClose }) {
@@ -42,7 +41,7 @@ export default function EditProfile({ onClose }) {
           body: JSON.stringify(formData),
         });
         if (response.ok) {
-          onClose();
+          window.location.reload();
         } else {
           console.error("Błąd podczas aktualizacji danych");
         }
@@ -53,100 +52,84 @@ export default function EditProfile({ onClose }) {
   };
 
   return (
-    <div className="w-full h-full mx-auto items-center flex flex-col">
-      <button onClick={onClose}>
-        <IoMdArrowRoundBack className="absolute md:top-[8%] md:left-[29%] mt-4 -ml-52 text-3xl" />
-      </button>
-      <h1 className="text-center text-4xl mt-16">Edytuj dane</h1>
-      <div className="flex w-3/5 mt-9 justify-center mx-auto">
+    <div className="w-full h-full flex flex-col bg-white">
+      <h1 className="text-4xl mt-16 ml-16">Edytuj dane</h1>
+      <div className="flex w-full mt-9 justify-center mx-auto">
         {userData && (
           <form
             onSubmit={handleFormSubmit}
-            className="md:w-[800px] md:h-[700px] w-[150%] p-9 md:p-0 bg-gray-200 rounded-xl mx-auto flex flex-col items-center justify-center"
+            className="md:w-full md:h-fit w-[150%] p-9 md:p-16 bg-white rounded-xl flex flex-col md:pl-32"
           >
-            <div className=" flex flex-row gap-20 items-center justify-center ">
+            <div className="flex flex-row gap-20">
               <div className="flex flex-col gap-2">
-                <label htmlFor="firstName" className="-mb-2">
-                  Imię:{" "}
-                </label>
-                <input
-                  type="text"
-                  name="firstName"
-                  placeholder="..."
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                  className="md:w-56 w-36 h-9 pl-2 rounded-lg"
-                />
-                <label htmlFor="lastName" className="-mb-2">
-                  Nazwisko:{" "}
-                </label>
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="..."
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                  className="md:w-56 w-36 h-9 pl-2 rounded-lg"
-                />
-                <label htmlFor="userName" className="-mb-2">
-                  Nazwa użytkownika:{" "}
-                </label>
-                <input
-                  type="text"
-                  name="userName"
-                  placeholder="..."
-                  value={formData.userName}
-                  onChange={handleInputChange}
-                  className="md:w-56 w-36 h-9 pl-2 rounded-lg"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="email" className="-mb-2">
-                  E-mail:
-                </label>
-                <input
-                  type="text"
-                  name="email"
-                  placeholder="..."
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="md:w-56 w-36 h-9 pl-2 rounded-lg"
-                />
-                <label htmlFor="sex" className="-mb-2">
-                  Płeć
-                </label>
-                <input
-                  type="text"
-                  name="sex"
-                  placeholder="..."
-                  value={formData.sex}
-                  onChange={handleInputChange}
-                  className="md:w-56 w-36 h-9 pl-2 rounded-lg"
-                />
-                <label htmlFor="age" className="-mb-2">
-                  Wiek:
-                </label>
-                <input
-                  type="text"
-                  name="age"
-                  placeholder="..."
-                  value={formData.age}
-                  onChange={handleInputChange}
-                  className="md:w-56 w-36 h-9 pl-2 rounded-lg"
-                />
+                <div className="flex flex-row gap-2">
+                  <label htmlFor="firstName" className=" w-full my-auto">
+                    Imię:{" "}
+                  </label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    placeholder="..."
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    className="md:w-fit w-36 h-9 pl-2 rounded-lg border-black border-[1px]"
+                  />
+                </div>
+                <div className="flex flex-row gap-2">
+                  <label htmlFor="lastName" className="w-full my-auto">
+                    Nazwisko:{" "}
+                  </label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="..."
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    className="md:w-fit w-36 h-9 pl-2 rounded-lg border-black border-[1px]"
+                  />
+                </div>
+                <div className="flex flex-row gap-2">
+                  <label htmlFor="userName" className=" my-auto">
+                    Nazwa użytkownika:{" "}
+                  </label>
+                  <input
+                    type="text"
+                    name="userName"
+                    placeholder="..."
+                    value={formData.userName}
+                    onChange={handleInputChange}
+                    className="md:w-fit w-36 h-9 pl-2 rounded-lg border-black border-[1px]"
+                  />
+                </div>
+                <div className="flex flex-row gap-2">
+                  <label htmlFor="email" className=" my-auto w-full">
+                    E-mail:{" "}
+                  </label>
+                  <input
+                    type="text"
+                    name="email"
+                    placeholder="..."
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="md:w-fit w-36 h-9 pl-2 rounded-lg border-black border-[1px] "
+                  />
+                </div>
+                <div className="flex flex-row gap-2">
+                  <label htmlFor="buildingName" className="w-full my-auto">
+                    Budynek:
+                  </label>
+                  <input
+                    type="text"
+                    name="buildingName"
+                    placeholder="..."
+                    value={formData.buildingName}
+                    onChange={handleInputChange}
+                    className="md:w-fit w-36 h-9 pl-2 rounded-lg border-black border-[1px]"
+                  />
+                </div>
               </div>
             </div>
-            <label htmlFor="buildingName" className="mt-2">
-              Budynek:{" "}
-            </label>
-            <input
-              type="text"
-              name="buildingName"
-              placeholder="..."
-              value={formData.buildingName}
-              onChange={handleInputChange}
-              className="md:w-56 w-36 h-9 pl-2 rounded-lg"
-            />
+
             <label htmlFor="description" className="mt-9">
               Opis
             </label>
@@ -155,11 +138,11 @@ export default function EditProfile({ onClose }) {
               placeholder="..."
               value={formData.description}
               onChange={handleInputChange}
-              className="md:w-[600px] md:h-[200px] pl-2 rounded-lg resize-none text-justify"
+              className="md:w-full md:h-[200px] pl-2 rounded-lg resize-none items-center mt-4 text-justify border-gray-300 border-[1px]"
             />
             <button
               type="submit"
-              className="px-5 py-2 w-24 mt-12 h-12 text-white bg-[#0A390C] rounded-lg"
+              className="px-5 py-2 w-full mt-12 h-12 text-white bg-[#0A390C] rounded-lg"
             >
               Zapisz
             </button>
