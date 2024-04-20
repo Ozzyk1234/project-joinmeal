@@ -9,7 +9,6 @@ const UserConfiguration = ({ userid }) => {
     gender: "Kobieta",
     building: "Blizniak",
   });
-  console.log(userid);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

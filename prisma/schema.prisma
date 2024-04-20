@@ -14,8 +14,8 @@ model User {
   firstName     String?   @default("BRAK DANYCH")
   lastName      String?   @default("BRAK DANYCH")
   picture       Bytes?    
-  age           Int?       @default(0)
-  sex           String?    @default("Mężczyzna")
+  age           DateTime? 
+  sex           String?   @default("Mężczyzna")
   buildingName  String?   @default("DOM STUDENTA 2 - BLIZNIAK")
   description   String?   @default("Podaj opis użytkownika...")
   email         String    @unique
