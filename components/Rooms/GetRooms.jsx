@@ -160,7 +160,7 @@ export default function GetRooms() {
         </div>
       </div>
       <div className="w-[80%] mx-auto h-fit flex flex-col justify-between ">
-        <h1 className="text-4xl text-center mb-9">Dostępne pokoje</h1>
+        <h1 className="text-4xl text-center mb-4">Dostępne pokoje</h1>
 
         {loading ? (
           <div className="w-[100%]">
@@ -173,7 +173,7 @@ export default function GetRooms() {
                 <Link key={room.id} href={`/dashboard/room/${room.id}`}>
                   <div
                     key={room.id}
-                    className="w-38 h-48 flex flex-col justify-between border-2 border-gray-600 bg-white shadow-2xl items-center rounded-lg"
+                    className="w-36 h-48 flex flex-col justify-between border-2 border-gray-600 bg-white shadow-2xl items-center rounded-lg"
                   >
                     <h1 className="text-center mt-2">{room.name}</h1>
                     {generateImage(room.dishimage)}
@@ -182,7 +182,7 @@ export default function GetRooms() {
                 </Link>
               ))}
             </div>
-            <div className="absolute bottom-24 m-0 p-0 left-[58%] -z-2">
+            <div className="absolute bottom-2 m-0 p-0 left-[58%] -z-2">
               <button
                 onClick={prevPage}
                 disabled={currentPage === 1}
