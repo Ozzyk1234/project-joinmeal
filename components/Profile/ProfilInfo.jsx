@@ -79,7 +79,7 @@ export default function ProfilInfo() {
           </ul>
         </div>
       ) : (
-        <div className=" border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600 mt-16" />
+        <div className=" border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600 mt-16 mx-auto" />
       )}
       <h1 className="text-xl text-gray-700 mt-4">Opis</h1>
       {userData && (
