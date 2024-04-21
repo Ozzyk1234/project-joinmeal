@@ -31,7 +31,6 @@ export default function ProfilInfo() {
       const year = date.getFullYear();
       const year2 = date2.getFullYear();
       const currentAge = year - year2;
-      console.log(currentAge);
       return (
         <ul className="flex flex-col gap-5 text-sm">
           <li className="text-gray-600">

@@ -16,6 +16,8 @@ const dishes = [
 
 export default function CreateRoom({ onClose }) {
   const [formData, setFormData] = useState({});
+  const [formError, setFormError] = useState("");
+
   const [selectedDish, setSelectedDish] = useState(null);
 
   const { data: session } = useSession();
@@ -39,6 +41,9 @@ export default function CreateRoom({ onClose }) {
     e.preventDefault();
     if (session?.user?.id) {
       try {
+        if (selectDish === null) {
+          return setFormError("Nie wybrano zdjecia!");
+        }
         const response = await fetch(
           `/api/rooms/createRoom/${session.user.id}`,
           {
@@ -124,6 +129,7 @@ export default function CreateRoom({ onClose }) {
                 name="dishtype"
                 value={formData.dishtype}
                 onChange={handleInputChange}
+                required
               >
                 <option>Śniadanie</option>
                 <option>Drugie śniadanie</option>
@@ -141,6 +147,7 @@ export default function CreateRoom({ onClose }) {
                 name="categoryofMeal"
                 value={formData.categoryofMeal}
                 onChange={handleInputChange}
+                required
               >
                 <option>Azjatycka</option>
                 <option>Włoska</option>
@@ -157,6 +164,9 @@ export default function CreateRoom({ onClose }) {
               </select>
             </div>
           </div>
+          <h1 className="text-2xl mb-2">
+            Wybierz zdjęcie najlepiej pasujące do posiłku
+          </h1>
           <div className="grid grid-cols-4 w-full gap-12 items-center justify-center">
             {dishes.map((dish) => (
               <Image
