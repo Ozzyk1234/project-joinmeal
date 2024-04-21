@@ -185,14 +185,14 @@ export default function GetRooms() {
             <div className="absolute bottom-2 m-0 p-0 left-[58%] -z-2">
               <button
                 onClick={prevPage}
-                disabled={currentPage === 1}
+                hidden={currentPage === 1}
                 className="px-3 py-1 mr-2 bg-[#0A390C] text-white rounded -z-1"
               >
                 <FaArrowLeft />
               </button>
               <button
                 onClick={nextPage}
-                disabled={rooms.length < pageSize}
+                hidden={rooms.length < pageSize}
                 className="px-3 py-1 bg-[#0A390C] text-white rounded -z-1"
               >
                 <FaArrowRight />
