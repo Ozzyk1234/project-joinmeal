@@ -40,6 +40,7 @@ model Room {
   createdAt      DateTime   @default(now())
   category       String?
   type           String?
+  dishimage      Int?
   UserCreated    User       @relation(fields: [idUserCreated], references: [id])
   users          RoomsUsers[]
 

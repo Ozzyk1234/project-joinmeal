@@ -27,9 +27,14 @@ export default function CreateRoom({ onClose }) {
     }));
   };
 
-  const selectDish = (id) => {
+  const selectDish = async (id) => {
     setSelectedDish(id);
+    setFormData((prevData) => ({
+      ...prevData,
+      dishImage: id,
+    }));
   };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (session?.user?.id) {

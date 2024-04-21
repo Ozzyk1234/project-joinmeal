@@ -27,7 +27,6 @@ export default function MainContent() {
               Utwórz pokój
             </button>
           </div>
-          <h1 className="text-4xl text-center mt-9">Dostępne pokoje</h1>
           <GetRooms />
         </div>
       )}
