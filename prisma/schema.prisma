@@ -38,8 +38,11 @@ model Room {
   cost           Float?     @default(0.0)
   time           DateTime
   createdAt      DateTime   @default(now())
+  category       String?
+  type           String?
   UserCreated    User       @relation(fields: [idUserCreated], references: [id])
   users          RoomsUsers[]
+
 }
 
 model RoomsUsers {
