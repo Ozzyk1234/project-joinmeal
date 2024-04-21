@@ -168,12 +168,12 @@ export default function GetRooms() {
           </div>
         ) : (
           <>
-            <div className="md:grid md:grid-cols-4 mx-auto md:gap-16 flex flex-col gap-5">
+            <div className="md:grid md:grid-cols-4 mx-auto lg: md:gap-6 flex flex-col gap-5">
               {filteredData.map((room) => (
                 <Link key={room.id} href={`/dashboard/room/${room.id}`}>
                   <div
                     key={room.id}
-                    className="w-48 h-64 flex flex-col justify-between border-2 border-gray-600 bg-white shadow-2xl items-center rounded-lg"
+                    className="w-38 h-48 flex flex-col justify-between border-2 border-gray-600 bg-white shadow-2xl items-center rounded-lg"
                   >
                     <h1 className="text-center mt-2">{room.name}</h1>
                     {generateImage(room.dishimage)}
