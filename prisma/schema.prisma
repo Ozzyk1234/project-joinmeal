@@ -80,7 +80,6 @@ model UserInKitchen {
   idUser         Int
   idKitchen      Int
   dateToEnd      DateTime
-  
   user           User     @relation(fields: [idUser], references: [id])
   kitchen        Kitchen  @relation(fields: [idKitchen], references: [id])
   

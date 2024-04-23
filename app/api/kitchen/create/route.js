@@ -12,15 +12,15 @@ const prisma = new PrismaClient();
 
 const createNewKitchen = async (req, res) => {
   const body = await req.json();
-  const slots = parseInt(body.slots)
-  const buildingName = body.buildingName
-  const floor = parseInt(body.floor)
+  const slots = parseInt(body.slots);
+  const buildingName = body.buildingName;
+  const floor = parseInt(body.floor);
   try {
     const kitchenJoin = await prisma.kitchen.create({
       data: {
         slots: slots,
         buildingName: buildingName,
-        floor: floor
+        floor: floor,
       },
     });
 

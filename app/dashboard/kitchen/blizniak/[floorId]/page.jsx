@@ -5,7 +5,6 @@ import Image from "next/image";
 
 export default function KitchenSelected({ params }) {
   const floorId = params.floorId;
-  console.log(floorId);
   const [usersInKitchen, setUsersInKitchen] = useState([]);
   const [isAvailable, setIsAvailable] = useState([]);
 
@@ -15,20 +14,10 @@ export default function KitchenSelected({ params }) {
       const response = await users.json();
       setUsersInKitchen(response);
       setIsAvailable(new Array(response.length).fill(true)); // Initialize availability state
-      console.log(response);
     };
 
     fetchUsers();
   }, [floorId]);
-
-  const toggleReservation = (index) => {
-    // Create a copy of the isAvailable array
-    const updatedAvailability = [...isAvailable];
-    // Toggle the availability of the slot at the given index
-    updatedAvailability[index] = !updatedAvailability[index];
-    // Update the state with the new availability
-    setIsAvailable(updatedAvailability);
-  };
 
   const getKitchens = () => {
     const kitchenImages = [];
@@ -41,7 +30,6 @@ export default function KitchenSelected({ params }) {
               className={`border-black border-[1px] rounded-full w-9 h-9 ${
                 isAvailable[i] ? "bg-[#317c35]" : "bg-[#9c2c2c]"
               }`}
-              onClick={() => toggleReservation(i)} // Call toggleReservation on click
             />
             <Image src={"/Stove.png"} alt="Kuchenka" width={300} height={70} />
           </div>
