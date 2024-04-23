@@ -101,32 +101,6 @@ export default function EditProfile({ onClose }) {
                     className="md:w-fit w-36 h-9 pl-2 rounded-lg border-black border-[1px]"
                   />
                 </div>
-                <div className="flex flex-row gap-2">
-                  <label htmlFor="email" className=" my-auto w-full">
-                    E-mail:{" "}
-                  </label>
-                  <input
-                    type="text"
-                    name="email"
-                    placeholder="..."
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="md:w-fit w-36 h-9 pl-2 rounded-lg border-black border-[1px] "
-                  />
-                </div>
-                <div className="flex flex-row gap-2">
-                  <label htmlFor="buildingName" className="w-full my-auto">
-                    Budynek:
-                  </label>
-                  <input
-                    type="text"
-                    name="buildingName"
-                    placeholder="..."
-                    value={formData.buildingName}
-                    onChange={handleInputChange}
-                    className="md:w-fit w-36 h-9 pl-2 rounded-lg border-black border-[1px]"
-                  />
-                </div>
               </div>
             </div>
 

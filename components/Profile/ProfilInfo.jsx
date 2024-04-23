@@ -29,12 +29,14 @@ export default function ProfilInfo() {
       const date = new Date();
       const date2 = new Date(userData.age);
       const year = date.getFullYear();
+
       const year2 = date2.getFullYear();
+      console.log(year, year2);
       const currentAge = year - year2;
       return (
         <ul className="flex flex-col gap-5 text-sm">
           <li className="text-gray-600">
-            Wiek <br />
+            Wiek
             <p className="text-lg text-black">{currentAge}</p>
           </li>
         </ul>

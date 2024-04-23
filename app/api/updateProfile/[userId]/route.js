@@ -25,7 +25,7 @@ const POST = async (req, { params }) => {
         firstName: body.firstName,
         lastName: body.lastName,
         sex: body.sex,
-        age: parseInt(body.age, 10),
+        age: birthDatenew,
       },
       select: {
         description: true,

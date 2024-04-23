@@ -20,6 +20,9 @@ const POST = async (req) => {
   const urlParams = new URL(req.url, "http://localhost:3000").searchParams;
   const userId = parseInt(urlParams.get("userId"));
   const body = await req.json();
+  console.log(body);
+  const birthDate = body.birthDate + "T00:00:00Z";
+
   const userConfiguration = await prisma.user.update({
     where: {
       id: userId,
@@ -29,6 +32,7 @@ const POST = async (req) => {
       lastName: body.lastName,
       sex: body.gender,
       buildingName: body.building,
+      age: birthDate,
       isConfigured: true,
     },
   });
