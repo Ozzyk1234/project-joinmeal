@@ -17,6 +17,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className="scroll-smooth"
       style={{ scrollBehavior: "smooth" }}
+      id="root"
     >
       <body className="w-full h-screen bg-gray-100 bg-no-repeat bg-cover font-Poppins">
         <AuthProvider>

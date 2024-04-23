@@ -1,26 +1,27 @@
-//localhost:3000/api/kitchen/countUser/1
-
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-
 const prisma = new PrismaClient();
 
 const GET = async (req, { params }) => {
-  const idKitchen = await parseInt(params.kitchenId, 10);
-  try {
-    const countUsersInKitchen = await prisma.userInKitchen.count({
-      where: {
-        idKitchen: idKitchen,
-      },
-    });
+  const buildingName = params.buildingName;
 
-    return NextResponse.json({ count: countUsersInKitchen });
+  try {
+    const allKitchen = await prisma.kitchen.findMany({
+      where: { buildingName: buildingName },
+    });
+    if (allKitchen.length > 0) {
+      return NextResponse.json(allKitchen);
+    } else {
+      return NextResponse.json([]);
+    }
   } catch (error) {
     console.error("Błąd:", error);
-    return NextResponse.json(
+    return new NextResponse(
       { message: "Wystąpił błąd podczas pobierania danych z bazy." },
+
       { status: 500 }
     );
   }
 };
+
 export { GET };

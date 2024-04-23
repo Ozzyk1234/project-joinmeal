@@ -7,7 +7,7 @@ const UserConfiguration = ({ userid }) => {
     lastName: "",
     birthDate: "",
     gender: "Kobieta",
-    building: "Blizniak",
+    building: "Bliźniak",
   });
 
   const handleChange = (e) => {

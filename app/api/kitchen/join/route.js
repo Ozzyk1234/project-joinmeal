@@ -12,9 +12,10 @@ const prisma = new PrismaClient();
 
 const joinToKitchen = async (req, res) => {
   const body = await req.json();
-  const idUser = parseInt(body.idUser)
-  const idKitchen = parseInt(body.idKitchen)
-  const expiryDate = body.dateToEnd
+  console.log(body);
+  const idUser = parseInt(body.userId);
+  const idKitchen = parseInt(body.kitchenId);
+  const expiryDate = body.dateToEnd;
   const date = expiryDate + ":00Z";
   const milliseconds = Date.parse(date);
   const Newdate = new Date(milliseconds);
