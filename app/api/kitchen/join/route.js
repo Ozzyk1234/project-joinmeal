@@ -15,7 +15,7 @@ const joinToKitchen = async (req, res) => {
   console.log(body);
   const idUser = parseInt(body.userId);
   const idKitchen = parseInt(body.kitchenId);
-  const expiryDate = body.dateToEnd;
+  const expiryDate = body.time;
   const date = expiryDate + ":00Z";
   const milliseconds = Date.parse(date);
   const Newdate = new Date(milliseconds);

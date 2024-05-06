@@ -1,3 +1,5 @@
+//Archiwum? xD chyba do wywalenia, ale to trza na spokojnie zobaczyc
+
 // Testowo w liscie, zobacz czy da sie jakis hook ustawic na list i czy samo sie bedzie zmieniac? Podpowiedzi na dole V
 
 import { PrismaClient } from "@prisma/client";

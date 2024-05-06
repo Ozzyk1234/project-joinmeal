@@ -26,6 +26,7 @@ model User {
   roomsCreated  Room[]
   items         Item[]
   userInKitchen UserInKitchen[]
+  boards        Board[] 
 }
 
 model Room {
@@ -57,14 +58,14 @@ model RoomsUsers {
 }
 
 model Item {
-  id Int @id            @default(autoincrement())
-  idUser Int 
-  name String
-  cost Float
-  status Boolean?       @default(true)
-  expiryDate DateTime
-  createdAt DateTime    @default(now())
-  user User             @relation(fields: [idUser], references: [id])
+  id             Int        @id @default(autoincrement())
+  idUser         Int 
+  name           String
+  cost           Float
+  status         Boolean?    @default(true)
+  expiryDate     DateTime
+  createdAt      DateTime    @default(now())
+  user           User        @relation(fields: [idUser], references: [id])
 }
 
 model Kitchen {
@@ -85,3 +86,13 @@ model UserInKitchen {
   
   @@unique([idUser, idKitchen])
 }
+
+
+model Board {
+  id             Int        @id @default(autoincrement())
+  message        String
+  createdAt      DateTime   @default(now())
+  userId         Int
+  user           User       @relation(fields: [userId], references: [id])
+}
+
