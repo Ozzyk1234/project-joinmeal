@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-const GET = async (req, { params }) => {
+const GET = async (req, res) => {
   let allItems = [];
   try {
     allItems = await prisma.board.findMany({
