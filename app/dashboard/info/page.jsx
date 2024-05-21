@@ -47,7 +47,7 @@ export default function Info() {
           </div>
           <div className="grid grid-cols-1 gap-3 w-[80%] h-fit mt-9 ">
             {data.map((item) => (
-              <div key={item.idd} className="text-justify p-4 border-2">
+              <div key={item.id} className="text-justify p-4 border-2">
                 <p>{item.message}</p>
               </div>
             ))}
