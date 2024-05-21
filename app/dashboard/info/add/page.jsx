@@ -34,8 +34,7 @@ export default function AddInfo() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        setFormData({ idUser: session?.user?.id, message: "" });
-        router.push(`/dashboard/info`);
+        router.push(`/dashboard`);
       } else {
         console.error("Błąd podczas dodawania produktu");
       }
