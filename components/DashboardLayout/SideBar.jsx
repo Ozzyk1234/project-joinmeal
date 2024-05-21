@@ -8,6 +8,7 @@ import { PiCookingPot } from "react-icons/pi";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { FaKitchenSet } from "react-icons/fa6";
+import { CiCircleInfo } from "react-icons/ci";
 
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -24,6 +25,9 @@ export default function SideBar() {
   };
   const handleRecipe = async () => {
     router.push(`/dashboard/recipe`);
+  };
+  const handleInfo = async () => {
+    router.push(`/dashboard/info`);
   };
   return (
     <div
@@ -65,6 +69,13 @@ export default function SideBar() {
         >
           <PiCookingPot />
           Przepisy
+        </button>
+        <button
+          onClick={() => handleInfo()}
+          className="flex flex-row gap-2 items-center cursor-pointer"
+        >
+          <CiCircleInfo />
+          Tablica ogłoszeń
         </button>
         {open ? (
           <MdOutlineArrowBackIosNew

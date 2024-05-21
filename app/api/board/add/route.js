@@ -5,8 +5,9 @@ const prisma = new PrismaClient();
 
 const addNew = async (req, res) => {
   const body = await req.json();
-  const idUser = parseInt(body.idUser, 10)
-  const message = body.message
+  console.log(body);
+  const idUser = parseInt(body.idUser, 10);
+  const message = body.message;
   try {
     const addBoard = await prisma.board.create({
       data: {
