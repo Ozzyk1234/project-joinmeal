@@ -11,7 +11,11 @@ export default function Info() {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const messages = await fetch(`/api/board/showAll`);
+        const messages = await fetch(`/api/board/showAll`, {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        });
         if (!messages.ok) {
           throw new Error("Failed to fetch data");
         }
