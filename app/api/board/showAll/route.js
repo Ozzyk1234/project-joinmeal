@@ -3,25 +3,25 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-const GET = async (req, { params }) => {
+const GET = async () => {
   try {
     const allItems = await prisma.board.findMany({
       orderBy: {
-        createdAt: 'desc',
+        createdAt: "desc",
       },
     });
 
-    if (await allItems.length > 0) {
+    if (allItems.length > 0) {
       return NextResponse.json(allItems, {
         headers: {
-          'Cache-Control': 'no-cache',
+          "Cache-Control": "no-cache",
         },
       });
     } else {
       return NextResponse.json([], {
         headers: {
-          'Cache-Control': 'no-cache',
-        }
+          "Cache-Control": "no-cache",
+        },
       });
     }
   } catch (error) {
@@ -33,6 +33,6 @@ const GET = async (req, { params }) => {
   } finally {
     await prisma.$disconnect();
   }
-}
+};
 
 export { GET };
