@@ -12,16 +12,16 @@ export default function Info() {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const messages = await fetch(`/api/board/showAll`, {
+        const response = await fetch(`/api/board/showAll`, {
           headers: {
             "Cache-Control": "no-cache",
           },
         });
-        if (!messages.ok) {
+        if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
-        const response = await messages.json();
-        setData(response);
+        const result = await response.json();
+        setData(result);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -37,19 +37,24 @@ export default function Info() {
   };
 
   return (
-    <div>
-      <DashboardLayout>
-        <div className="w-[80%] h-screen border-r-[1px] border-l-[1px] border-gray-200 ml-[10%] pt-24 flex flex-col items-center">
-          <h1 className="text-4xl text-center">Tablica ogłoszeń</h1>
+    <DashboardLayout>
+      <div className="w-[80%] h-screen border-r-[1px] border-l-[1px] border-gray-200 ml-[10%] pt-24 flex flex-col items-center">
+        <h1 className="text-4xl text-center">Tablica ogłoszeń</h1>
 
-          <div className="w-full flex flex-row justify-end">
-            <button
-              onClick={handleInfo}
-              className="rounded-lg text-white bg-[#0A390C] py-2 px-3 mt-4 mr-9"
-            >
-              Dodaj wpis!
-            </button>
-          </div>
+        <div className="w-full flex flex-row justify-end">
+          <button
+            onClick={handleInfo}
+            className="rounded-lg text-white bg-[#0A390C] py-2 px-3 mt-4 mr-9"
+          >
+            Dodaj wpis!
+          </button>
+        </div>
+
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Error: {error}</p>
+        ) : (
           <div className="grid grid-cols-1 gap-3 w-[80%] h-fit mt-9">
             {data.map((item) => (
               <div key={item.id} className="text-justify p-4 border-2">
@@ -57,8 +62,8 @@ export default function Info() {
               </div>
             ))}
           </div>
-        </div>
-      </DashboardLayout>
-    </div>
+        )}
+      </div>
+    </DashboardLayout>
   );
 }
