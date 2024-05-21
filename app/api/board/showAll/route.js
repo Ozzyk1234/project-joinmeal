@@ -3,9 +3,14 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
+<<<<<<< HEAD
 const GET = async () => {
+=======
+const GET = async (req, { params }) => {
+  let allItems = [];
+>>>>>>> 11e51bb4db310ea01fe9719c89b6d55621963579
   try {
-    const allItems = await prisma.board.findMany({
+      allItems = await prisma.board.findMany({
       orderBy: {
         createdAt: "desc",
       },
