@@ -5,30 +5,22 @@ const prisma = new PrismaClient();
 
 const GET = async () => {
   try {
-    let allItems = await prisma.board.findMany({
+    const allItems = await prisma.board.findMany({
       orderBy: {
         createdAt: "desc",
       },
     });
 
-    if (allItems.length > 0) {
-      return NextResponse.json(allItems, {
-        headers: {
-          "Cache-Control": "no-cache",
-        },
-      });
-    } else {
-      return NextResponse.json([], {
-        headers: {
-          "Cache-Control": "no-cache",
-        },
-      });
-    }
+    return NextResponse.json(allItems, {
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    });
   } catch (error) {
-    console.error("Błąd podczas dodawania nowego ogłoszenia (board):", error);
+    console.error("Error fetching board items:", error);
     return new NextResponse(
-      { message: "Wystąpił błąd podczas pobierania ogłoszen" },
-      { status: 500 }
+      JSON.stringify({ message: "Error fetching board items" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
     );
   } finally {
     await prisma.$disconnect();
