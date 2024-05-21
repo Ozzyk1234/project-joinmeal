@@ -3,14 +3,10 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-const GET = async (req, { params }) => {
-    const allItems = await prisma.board.findMany();
+const GET = async () => {
+  const allItems = await prisma.board.findMany();
 
-    if (allItems.length > 0) {
-      return NextResponse.json(allItems);
-    } else {
-      return NextResponse.json([]);
-    }
-}
+  return NextResponse.json(allItems);
+};
 
 export { GET };
