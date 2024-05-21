@@ -13,17 +13,9 @@ const GET = async (req, { params }) => {
     });
 
     if (await allItems.length > 0) {
-      return NextResponse.json(allItems, {
-        headers: {
-          'Cache-Control': 'no-cache',
-        },
-      });
+      return NextResponse.json(allItems);
     } else {
-      return NextResponse.json([], {
-        headers: {
-          'Cache-Control': 'no-cache',
-        }
-      });
+      return NextResponse.json([]);
     }
   } catch (error) {
     console.error("Błąd podczas dodawania nowego ogłoszenia (board):", error);
