@@ -5,13 +5,22 @@ import { useRouter } from "next/navigation";
 
 export default function Info() {
   const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
     const fetchInfo = async () => {
-      const messages = await fetch(`/api/board/showAll`);
-      const response = await messages.json();
-      setData(response);
+      try {
+        const messages = await fetch(`/api/board/showAll`);
+        if (!messages.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const response = await messages.json();
+        setData(response);
+        console.log(response);
+      } catch (error) {
+        setError(error.message);
+      }
     };
 
     fetchInfo();
@@ -20,11 +29,14 @@ export default function Info() {
   const handleInfo = async () => {
     router.push(`/dashboard/info/add`);
   };
+
   return (
     <div>
       <DashboardLayout>
         <div className="w-[80%] h-screen border-r-[1px] border-l-[1px] border-gray-200 ml-[10%] pt-24 flex flex-col items-center">
           <h1 className="text-4xl text-center">Tablica ogłoszeń</h1>
+          {error && <p className="text-red-500">{error}</p>}{" "}
+          {/* Display error message */}
           <div className="w-full flex flex-row justify-end">
             <button
               onClick={handleInfo}
@@ -35,7 +47,7 @@ export default function Info() {
           </div>
           <div className="grid grid-cols-1 gap-3 w-[80%] h-fit mt-9 ">
             {data.map((item) => (
-              <div key={item.id} className="text-justify p-4 border-2">
+              <div key={item.idd} className="text-justify p-4 border-2">
                 <p>{item.message}</p>
               </div>
             ))}
