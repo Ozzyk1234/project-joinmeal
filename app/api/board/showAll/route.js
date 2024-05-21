@@ -4,8 +4,9 @@ import { NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 const GET = async (req, { params }) => {
+  const allItems = [];
   try {
-    const allItems = await prisma.board.findMany({
+      allItems = await prisma.board.findMany({
       orderBy: {
         createdAt: 'desc',
       },
