@@ -6,9 +6,9 @@ const prisma = new PrismaClient();
 const GET = async (req, { params }) => {
   let allItems = [];
   try {
-      allItems = await prisma.board.findMany({
+    allItems = await prisma.board.findMany({
       orderBy: {
-        createdAt: 'desc',
+        createdAt: "desc",
       },
     });
 
@@ -26,6 +26,6 @@ const GET = async (req, { params }) => {
   } finally {
     await prisma.$disconnect();
   }
-}
+};
 
 export { GET };
