@@ -11,10 +11,18 @@ const GET = async (req, { params }) => {
       },
     });
 
-    if (allItems.length > 0) {
-      return NextResponse.json(allItems);
+    if (await allItems.length > 0) {
+      return NextResponse.json(allItems, {
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      });
     } else {
-      return NextResponse.json([]);
+      return NextResponse.json([], {
+        headers: {
+          'Cache-Control': 'no-cache',
+        }
+      });
     }
   } catch (error) {
     console.error("Błąd podczas dodawania nowego ogłoszenia (board):", error);
