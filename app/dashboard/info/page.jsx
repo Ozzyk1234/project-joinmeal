@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function Info() {
   const [data, setData] = useState([]);
-  const [error, setError] = useState(null); // State to handle errors
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -17,8 +17,9 @@ export default function Info() {
         }
         const response = await messages.json();
         setData(response);
+        console.log(response);
       } catch (error) {
-        setError(error.message); // Set error state if fetch fails
+        setError(error.message);
       }
     };
 
