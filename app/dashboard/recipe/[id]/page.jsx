@@ -39,7 +39,7 @@ const SelectedRecipe = ({ params }) => {
           />
           <div className="p-4">
             <h2 className="text-2xl font-bold mb-2">{recipeDetails.title}</h2>
-            <h3 className="text-xl font-semibold">Ingredients</h3>
+            <h3 className="text-xl font-semibold">Składniki:</h3>
             <ul className="list-disc marker:text-green-600 pl-5 mb-4">
               {recipeDetails.extendedIngredients.map((ingredient) => (
                 <li key={ingredient.id} className="mb-1">
@@ -47,7 +47,7 @@ const SelectedRecipe = ({ params }) => {
                 </li>
               ))}
             </ul>
-            <h3 className="text-xl font-semibold">Instructions</h3>
+            <h3 className="text-xl font-semibold">Instrukcje:</h3>
             <div
               className="instructions prose max-w-none"
               dangerouslySetInnerHTML={{ __html: recipeDetails.instructions }}
@@ -57,7 +57,7 @@ const SelectedRecipe = ({ params }) => {
             onClick={goBackToRecipes}
             className="mt-4 py-2 px-4 bg-[#0A390C] text-white rounded hover:bg-green-700 transition duration-300"
           >
-            Go Back to Recipes
+            Wróć
           </button>
         </div>
       ) : (
