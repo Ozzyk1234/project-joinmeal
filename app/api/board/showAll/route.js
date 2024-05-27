@@ -3,25 +3,21 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-const GET = async () => {
+const GET = async (req, res) => {
   try {
     const allItems = await prisma.board.findMany({
       orderBy: {
         createdAt: "desc",
       },
     });
-
-    return NextResponse.json(allItems, {
-      headers: {
-        "Cache-Control": "no-cache",
-      },
-    });
+    if (allItems.length > 0) { 
+      return NextResponse.json(allItems);
+    } else {
+      return NextResponse.json([]);
+    }
   } catch (error) {
-    console.error("Error fetching board items:", error);
-    return new NextResponse(
-      JSON.stringify({ message: "Error fetching board items" }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
-    );
+    console.error("Błąd:", error);
+    return NextResponse.json([]);
   } finally {
     await prisma.$disconnect();
   }
