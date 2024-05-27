@@ -20,6 +20,10 @@ export default function SideBar() {
     router.push(`/dashboard/fridge`);
   };
 
+  const handleFriendList = async () => {
+    router.push(`/dashboard/friendlist`);
+  };
+
   const handleKitchen = async () => {
     router.push(`/dashboard/kitchen`);
   };
@@ -59,10 +63,13 @@ export default function SideBar() {
           <CgProfile />
           Profil
         </li>
-        <li className="flex flex-row gap-2 items-center cursor-pointer">
+        <button
+          onClick={handleFriendList}
+          className="flex flex-row gap-2 items-center cursor-pointer"
+        >
           <LiaUserFriendsSolid />
           Znajomi
-        </li>
+        </button>
         <button
           onClick={handleRecipe}
           className="flex flex-row gap-2 items-center cursor-pointer"

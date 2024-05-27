@@ -1,13 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
-export default function ProfilInfo() {
-  const { data: session } = useSession();
+export default function ProfilInfo({ userId }) {
+  const IdUser = userId;
   const [userData, setUserData] = useState(null);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await fetch(`/api/userDetails/${session?.user?.id}`);
+        const res = await fetch(`/api/userDetails/${IdUser}`);
         if (!res.ok) {
           throw new Error("Failed to fetch user data");
         }
@@ -22,7 +21,7 @@ export default function ProfilInfo() {
       }
     };
     fetchUserData();
-  }, [session?.user?.id]);
+  }, [IdUser]);
 
   const handleAge = () => {
     if (userData) {
@@ -31,7 +30,6 @@ export default function ProfilInfo() {
       const year = date.getFullYear();
 
       const year2 = date2.getFullYear();
-      console.log(year, year2);
       const currentAge = year - year2;
       return (
         <ul className="flex flex-col gap-5 text-sm">

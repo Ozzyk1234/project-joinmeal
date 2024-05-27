@@ -1,16 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
 
-export default function EditProfile({ onClose }) {
-  const { data: session } = useSession();
+export default function EditProfile({ userId }) {
+  const IdUser = userId;
   const [userData, setUserData] = useState(null);
   const [formData, setFormData] = useState({}); // Initialize as an empty object
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await fetch(`/api/userDetails/${session.user.id}`);
+        const res = await fetch(`/api/userDetails/${IdUser}`);
         const data = await res.json();
         setUserData(data);
         setFormData(data); // Update formData when userData is available
@@ -19,7 +18,7 @@ export default function EditProfile({ onClose }) {
       }
     };
     fetchUserData();
-  }, [session?.user?.id]);
+  }, [IdUser]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,9 +30,9 @@ export default function EditProfile({ onClose }) {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (session?.user?.id) {
+    if (IdUser) {
       try {
-        const response = await fetch(`/api/updateProfile/${session.user.id}`, {
+        const response = await fetch(`/api/updateProfile/${IdUser}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
 import ProfilInfo from "./ProfilInfo";
 
-export default function ProfilPhoto() {
-  const { data: session } = useSession();
+export default function ProfilPhoto({ userId }) {
   const [userImage, setUserImage] = useState("");
-  const userId = session?.user?.id;
+  const IdUser = userId;
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await fetch(`/api/userImage/${userId}`);
+        const res = await fetch(`/api/userImage/${IdUser}`);
         if (!res.ok) {
           throw new Error("Failed to fetch user data");
         }
@@ -28,7 +26,7 @@ export default function ProfilPhoto() {
       }
     };
     fetchUserData();
-  }, [session?.user?.id]);
+  }, [IdUser]);
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
@@ -38,17 +36,16 @@ export default function ProfilPhoto() {
       const image = event.target.result;
 
       try {
-        const response = await fetch(`/api/userImage/${session?.user?.id}`, {
+        const response = await fetch(`/api/userImage/${IdUser}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ picture: image }), // Sending the image as JSON data
+          body: JSON.stringify({ picture: image }),
         });
         if (!response.ok) {
           throw new Error("Failed to upload image");
         }
-        // Handle success if needed
       } catch (error) {
         console.error("Error uploading image:", error);
       }
@@ -58,7 +55,7 @@ export default function ProfilPhoto() {
   };
 
   return (
-    <div className="border-r-[1px] border-gray-500 bg-[url('/Broccolibg.jpg')] flex flex-col md:w-[50%] w-[40%] items-center">
+    <div className="border-r-[1px] border-gray-500 bg-[url('/Broccolibg.jpg')] bg-cover flex flex-col md:w-[100%] w-[40%] items-center">
       <label
         htmlFor="fileInput"
         className="cursor-pointer md:relative md:h-[240px] md:w-[240px] -z-1"
@@ -84,7 +81,6 @@ export default function ProfilPhoto() {
               />
             </div>
           ) : (
-            // <div className="w-[250px] h-[250px] bg-white rounded-full animate-ping"></div>
             <p></p>
           )}
         </div>
@@ -103,7 +99,7 @@ export default function ProfilPhoto() {
           </div>
         </div>
       </label>
-      <ProfilInfo />
+      <ProfilInfo userId={IdUser} />
     </div>
   );
 }

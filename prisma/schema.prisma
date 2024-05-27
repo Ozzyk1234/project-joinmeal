@@ -9,25 +9,29 @@ datasource db {
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
-  userName      String    
-  firstName     String?   @default("BRAK DANYCH")
-  lastName      String?   @default("BRAK DANYCH")
-  picture       Bytes?    
-  age           DateTime? 
-  sex           String?   @default("Mężczyzna")
-  buildingName  String?   @default("DOM STUDENTA 2 - BLIZNIAK")
-  description   String?   @default("Podaj opis użytkownika...")
-  email         String    @unique
+  id            Int             @id @default(autoincrement())
+  userName      String
+  firstName     String?         @default("BRAK DANYCH")
+  lastName      String?         @default("BRAK DANYCH")
+  picture       Bytes?
+  age           DateTime?
+  sex           String?         @default("Mężczyzna")
+  buildingName  String?         @default("DOM STUDENTA 2 - BLIZNIAK")
+  description   String?         @default("Podaj opis użytkownika...")
+  email         String          @unique
   password      String?
-  createdAt     DateTime  @default(now())
+  createdAt     DateTime        @default(now())
   rooms         RoomsUsers[]
-  isConfigured  Boolean @default(false)
+  isConfigured  Boolean         @default(false)
   roomsCreated  Room[]
   items         Item[]
   userInKitchen UserInKitchen[]
-  boards        Board[] 
+  boards        Board[]
+  friends       User[]          @relation("UserFriends")
+  friendOf      User[]          @relation("UserFriends")
 }
+
+
 
 model Room {
   id             Int        @id @default(autoincrement())
@@ -95,4 +99,5 @@ model Board {
   userId         Int
   user           User       @relation(fields: [userId], references: [id])
 }
+
 
