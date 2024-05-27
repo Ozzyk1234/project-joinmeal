@@ -12,7 +12,8 @@ export default function Info() {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await fetch(`/api/board/showAll`, {
+        let random = Math.floor(Math.random() * 10000)+1;
+        const response = await fetch(`/api/board/showAll/${random}`, {
           headers: {
             "Cache-Control": "no-cache",
           },

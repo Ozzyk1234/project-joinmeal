@@ -3,20 +3,18 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-const GET = async (req, res) => {
+const GET = async (req, { params }) => {
+  const random = await params.random;
+  const ranomdInt = parseInt(random, 10);
   try {
+    if(ranomdInt>0){}
     const allItems = await prisma.board.findMany({
       orderBy: {
         createdAt: "desc",
       },
     });
-    if (allItems.length > 0) { 
-      const response = NextResponse.json(allItems);
-      response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-      response.headers.set('Pragma', 'no-cache');
-      response.headers.set('Expires', '0');
-      response.headers.set('Surrogate-Control', 'no-store');
-      return response;
+    if (allItems.length > 0) {
+      return NextResponse.json(allItems);
     } else {
       return NextResponse.json([]);
     }
