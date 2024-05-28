@@ -12,6 +12,7 @@ export default function Profile({ params }) {
   const userId = params.userId;
   const [isOwnProfile, setIsOwnProfile] = useState(false);
   const [addtoFriends, setAddtoFriends] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (sessionUserId) {
@@ -23,7 +24,13 @@ export default function Profile({ params }) {
       }
     }
   }, [userId, sessionUserId]);
-  console.log(isOwnProfile);
+
+  const handleAddFriend = async () => {
+    const addfriend = await fetch(`/api/friends/${sessionUserId}/${userId}`);
+    const response = await addfriend.json();
+    console.log(response);
+    setMessage(response);
+  };
   return (
     <DashboardLayout>
       <div className="w-[100%] h-screen bg-gray-1 items-center flex flex-col pt-16">
@@ -31,10 +38,16 @@ export default function Profile({ params }) {
           <ProfilPhoto userId={userId} />
           {isOwnProfile && <EditProfile userId={userId} />}
           {addtoFriends && (
-            <div className="cursor-pointer absolute top-[45%] left-[70%] w-64 h-16 border border-[1px] rounded-lg border-gray-200 shadow shadow-lg flex flex-row items-center justify-between p-4 transition-all hover:scale-105 duration-100">
+            <button
+              onClick={handleAddFriend}
+              className="cursor-pointer absolute top-[45%] left-[70%] w-64 h-16 border-[1px] rounded-lg border-gray-200 shadow-lg flex flex-row items-center justify-between p-4 transition-all hover:scale-105 duration-100"
+            >
               <IoPersonAddSharp className="text-4xl" />
-              <h1>Dodaj do znajomych!</h1>
-            </div>
+              <p className="flex flex-col">
+                <p>Dodaj do znajomych!</p>
+                <p className="text-sm text-gray-500">{message}</p>
+              </p>
+            </button>
           )}
         </div>
       </div>
