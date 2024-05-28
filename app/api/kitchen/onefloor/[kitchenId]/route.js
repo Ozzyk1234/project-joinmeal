@@ -16,7 +16,6 @@ const GET = async (req, { params }) => {
         },
       }
     });
-    console.log(currentDate);
 
     const allKitchen = await prisma.kitchen.findUnique({
       where: { id: kitchenId },
