@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 async function getFriends(req, { params }) {
   const userId = parseInt(params.userId, 10);
+  console.log(userId);
   const friendships = await prisma.friendship.findMany({
     where: {
       OR: [{ userId: userId }, { friendId: userId }],

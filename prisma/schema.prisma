@@ -27,8 +27,8 @@ model User {
   items         Item[]
   userInKitchen UserInKitchen[]
   boards        Board[]
-  friends       User[]          @relation("UserFriends")
-  friendOf      User[]          @relation("UserFriends")
+  friends       Friendship[]    @relation("UserFriends")
+  friendOf      Friendship[]    @relation("UserFriendOf")
 }
 
 
@@ -101,3 +101,13 @@ model Board {
 }
 
 
+model Friendship {
+  id       Int    @id @default(autoincrement())
+  userId   Int
+  friendId Int
+
+  user     User   @relation("UserFriends", fields: [userId], references: [id])
+  friend   User   @relation("UserFriendOf", fields: [friendId], references: [id])
+
+  @@unique([userId, friendId])
+}
