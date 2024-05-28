@@ -7,6 +7,17 @@ const GET = async (req, { params }) => {
   console.log(kitchenId);
 
   try {
+    const now = new Date();
+    const currentDate = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString();
+    await prisma.userInKitchen.deleteMany({
+      where: {
+        dateToEnd: {
+          lt: currentDate,
+        },
+      }
+    });
+    console.log(currentDate);
+
     const allKitchen = await prisma.kitchen.findUnique({
       where: { id: kitchenId },
     });
