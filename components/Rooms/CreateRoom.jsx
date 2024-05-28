@@ -15,7 +15,10 @@ const dishes = [
 ];
 
 export default function CreateRoom({ onClose }) {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    categoryofMeal: "Azjatycka",
+    dishtype: "Śniadanie",
+  });
   const [formError, setFormError] = useState("");
 
   const [selectedDish, setSelectedDish] = useState(null);
@@ -127,9 +130,8 @@ export default function CreateRoom({ onClose }) {
                 className="w-56 h-9 pl-2 rounded-lg"
                 id="dishtype"
                 name="dishtype"
-                value={formData.dishtype}
+                value={formData.dishtype || "Śniadanie"}
                 onChange={handleInputChange}
-                required
               >
                 <option>Śniadanie</option>
                 <option>Drugie śniadanie</option>
@@ -147,20 +149,22 @@ export default function CreateRoom({ onClose }) {
                 name="categoryofMeal"
                 value={formData.categoryofMeal}
                 onChange={handleInputChange}
-                required
+                defaultValue={"Azjatycka"}
               >
-                <option>Azjatycka</option>
-                <option>Włoska</option>
-                <option>Francuska</option>
-                <option>Hiszpańska</option>
-                <option>Brytyjska</option>
-                <option>Amerykańska klasyczna</option>
-                <option>Meksykańska</option>
-                <option>Turecka</option>
-                <option>Afrykańska</option>
-                <option>Wegetariańska</option>
-                <option>Wegańska</option>
-                <option>Inne...</option>
+                <option value="Azjatycka">Azjatycka</option>
+                <option value="Włoska">Włoska</option>
+                <option value="Francuska">Francuska</option>
+                <option value="Hiszpańska">Hiszpańska</option>
+                <option value="Brytyjska">Brytyjska</option>
+                <option value="Amerykańska klasyczna">
+                  Amerykańska klasyczna
+                </option>
+                <option value="Meksykańska">Meksykańska</option>
+                <option value="Turecka">Turecka</option>
+                <option value="Afrykańska">Afrykańska</option>
+                <option value="Wegetariańska">Wegetariańska</option>
+                <option value="Wegańska">Wegańska</option>
+                <option value="Inne...">Inne...</option>
               </select>
             </div>
           </div>
