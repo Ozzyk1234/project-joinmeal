@@ -33,6 +33,9 @@ export default function SideBar() {
   const handleInfo = async () => {
     router.push(`/dashboard/info`);
   };
+  const handleHomePage = async () => {
+    router.push(`/`);
+  };
   return (
     <div
       className={`md:w-[10%] w-[40%] h-screen bg-black fixed top-0 text-white flex flex-col items-center border-r-2 border-black transition-all duration-500 z-30  ${
@@ -41,10 +44,13 @@ export default function SideBar() {
     >
       <h1 className="mt-20 text-2xl border-b-2 border-white">Menu</h1>
       <ul className="flex flex-col gap-8 mt-12">
-        <li className="flex flex-row gap-2 items-center cursor-pointer">
+        <button
+          onClick={handleHomePage}
+          className="flex flex-row gap-2 items-center cursor-pointer"
+        >
           <IoHomeOutline />
           Strona główna
-        </li>
+        </button>
         <button
           onClick={() => handlefridge()}
           className="flex flex-row gap-2 items-center cursor-pointer"
@@ -59,10 +65,6 @@ export default function SideBar() {
           <FaKitchenSet />
           Kuchnia
         </button>
-        <li className="flex flex-row gap-2 items-center cursor-pointer">
-          <CgProfile />
-          Profil
-        </li>
         <button
           onClick={handleFriendList}
           className="flex flex-row gap-2 items-center cursor-pointer"

@@ -18,10 +18,13 @@ export default function CreateRoom({ onClose }) {
   const [formData, setFormData] = useState({
     categoryofMeal: "Azjatycka",
     dishtype: "Śniadanie",
+    roomName: "",
+    slots: 0,
+    formattedDate: Date.now(),
   });
   const [formError, setFormError] = useState("");
 
-  const [selectedDish, setSelectedDish] = useState(null);
+  const [selectedDish, setSelectedDish] = useState(1);
 
   const { data: session } = useSession();
   const handleInputChange = (e) => {
@@ -39,6 +42,8 @@ export default function CreateRoom({ onClose }) {
       dishImage: id,
     }));
   };
+
+  console.log(selectedDish);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -69,6 +74,19 @@ export default function CreateRoom({ onClose }) {
     }
   };
 
+  // Oblicz bieżącą datę w formacie odpowiednim dla pola datetime-local
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    const hours = String(today.getHours()).padStart(2, "0");
+    const minutes = String(today.getMinutes()).padStart(2, "0");
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
+
+  const currentDate = getCurrentDate();
+
   return (
     <>
       <div className="flex flex-col md:mt-9">
@@ -93,10 +111,11 @@ export default function CreateRoom({ onClose }) {
               />
               <label htmlFor="slots">Liczba miejsc</label>
               <input
-                type="text"
+                type="number"
                 name="slots"
                 placeholder="..."
                 value={formData.slots}
+                min={2}
                 onChange={handleInputChange}
                 className="w-56 h-9 pl-2 rounded-lg"
                 required
@@ -104,6 +123,7 @@ export default function CreateRoom({ onClose }) {
               <label htmlFor="formattedDate">Czas zakończenia</label>
               <input
                 type="datetime-local"
+                min={currentDate}
                 name="formattedDate"
                 placeholder="..."
                 value={formData.formattedDate}
@@ -130,7 +150,7 @@ export default function CreateRoom({ onClose }) {
                 className="w-56 h-9 pl-2 rounded-lg"
                 id="dishtype"
                 name="dishtype"
-                value={formData.dishtype || "Śniadanie"}
+                value={formData.dishtype}
                 onChange={handleInputChange}
               >
                 <option>Śniadanie</option>
@@ -149,7 +169,6 @@ export default function CreateRoom({ onClose }) {
                 name="categoryofMeal"
                 value={formData.categoryofMeal}
                 onChange={handleInputChange}
-                defaultValue={"Azjatycka"}
               >
                 <option value="Azjatycka">Azjatycka</option>
                 <option value="Włoska">Włoska</option>

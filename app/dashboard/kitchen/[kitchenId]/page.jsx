@@ -100,6 +100,31 @@ export default function Room({ params }) {
     return kitchenImages;
   };
 
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    const hours = String(today.getHours()).padStart(2, "0");
+    const minutes = String(today.getMinutes()).padStart(2, "0");
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
+
+  const currentDate = getCurrentDate();
+
+  const getMaxReservationDate = () => {
+    const today = new Date();
+    today.setHours(today.getHours() + 2); // Dodaj 2 godziny
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    const hours = String(today.getHours()).padStart(2, "0");
+    const minutes = String(today.getMinutes()).padStart(2, "0");
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
+
+  const maxReservationDate = getMaxReservationDate();
+
   return (
     <DashboardLayout>
       <div className="w-[80%] h-screen border-r-[1px] border-l-[1px] border-gray-200 ml-[10%] pt-24 flex flex-col items-center">
@@ -148,11 +173,12 @@ export default function Room({ params }) {
           >
             <input
               type="datetime-local"
+              min={currentDate}
+              max={maxReservationDate}
               name="time"
               className="text-2xl"
               onChange={handleInputChange}
             />
-            {/* Ukryte pola dla ID użytkownika i ID kuchni */}
             <input type="hidden" name="userId" value={session?.user?.id} />
             <input type="hidden" name="kitchenId" value={kitchenId} />
             <button type="submit" className="text-xl mt-9">
